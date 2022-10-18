@@ -1,2 +1,2 @@
-package models.Interfaces.adapters;public interface IObserver {
+package models.Interfaces;public interface IObserver {
 }

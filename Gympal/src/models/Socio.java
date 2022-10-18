@@ -1,8 +1,11 @@
 package models;
 
-import adapters.IAdapterAutenticator;
+import models.Interfaces.adapters.IAdapterAutenticator;
+import models.objetivos.Objetivo;
 
 import java.util.List;
+
+import adapter.LoguinAdapter;
 
 public class Socio {
 
@@ -28,7 +31,11 @@ public class Socio {
         this.altura = altura;
     }
 
-    public void setearObjetvo(Objetivo objetivo){
+    public Socio() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public void setearObjetvo(Objetivo objetivo){
         return;
     }
 
@@ -81,5 +88,14 @@ public class Socio {
 
     public IAdapterAutenticator getAutenticador() {
         return autenticador;
+    }
+
+	public void setNroSocio(String nroSocio) {
+		this.nroSocio = nroSocio;
+	}
+
+    public boolean loguin(String user, String passwd) {
+		LoguinAdapter loguin = new LoguinAdapter();
+		return loguin.login(this, user, passwd);
     }
 }

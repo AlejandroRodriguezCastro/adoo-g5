@@ -1,4 +1,4 @@
-package adapters;
+package models.Interfaces.adapters;
 
 public interface IAdapterMasaMuscular {
 }

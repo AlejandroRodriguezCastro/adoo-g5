@@ -1,5 +1,7 @@
 package models;
 
+import models.enums.GrupoMuscular;
+
 public class Ejercicio {
 
     private Integer series;

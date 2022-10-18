@@ -1,4 +1,7 @@
-package models;
+package models.objetivos;
+
+import models.Rutina;
+import models.Socio;
 
 public abstract class Objetivo {
 
