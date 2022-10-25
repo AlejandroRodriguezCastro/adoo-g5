@@ -31,7 +31,11 @@ public class Socio {
         this.altura = altura;
     }
 
-    public Socio() {
+    public void setMediciones(List<Medicion> mediciones) {
+		this.mediciones = mediciones;
+	}
+
+	public Socio() {
 		// TODO Auto-generated constructor stub
 	}
 
@@ -98,4 +102,12 @@ public class Socio {
 		LoguinAdapter loguin = new LoguinAdapter();
 		return loguin.login(user, passwd);
     }
+
+	@Override
+	public String toString() {
+		return "Socio [nombre=" + nombre + ", apellido=" + apellido + ", nroSocio=" + nroSocio + ", documento="
+				+ documento + ", edad=" + edad + ", sexo=" + sexo + ", altura=" + altura + "]";
+	}
+    
+    
 }
