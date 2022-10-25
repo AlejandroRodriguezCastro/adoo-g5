@@ -94,8 +94,8 @@ public class Socio {
 		this.nroSocio = nroSocio;
 	}
 
-    public boolean loguin(String user, String passwd) {
+    public String loguin(String user, String passwd) {
 		LoguinAdapter loguin = new LoguinAdapter();
-		return loguin.login(this, user, passwd);
+		return loguin.login(user, passwd);
     }
 }
