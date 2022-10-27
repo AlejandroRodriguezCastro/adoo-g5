@@ -1,2 +1,5 @@
-package models.enums;public enum ExigenciaMuscular {
+package models.enums;
+
+public enum ExigenciaMuscular {
+    ALTA, MEDIA,BAJA
 }

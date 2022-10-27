@@ -1,2 +1,5 @@
-package models.enums;public class Sexo {
+package models.enums;
+
+public enum Sexo {
+    HOMBRE, MUJER, OTRO;
 }

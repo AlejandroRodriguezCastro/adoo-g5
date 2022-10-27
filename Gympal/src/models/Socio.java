@@ -1,6 +1,7 @@
 package models;
 
-import adapters.IAdapterAutenticator;
+import models.Interfaces.adapters.IAdapterAutenticator;
+import models.objetivos.Objetivo;
 
 import java.util.List;
 
@@ -29,6 +30,7 @@ public class Socio {
     }
 
     public void setearObjetvo(Objetivo objetivo){
+        this.objetivo = objetivo;
         return;
     }
 

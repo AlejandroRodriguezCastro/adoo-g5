@@ -1,5 +1,7 @@
 package models;
 
+import models.enums.Dias;
+
 import java.util.List;
 
 public class Rutina {

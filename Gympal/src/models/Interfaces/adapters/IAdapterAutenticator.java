@@ -1,7 +1,7 @@
-package adapters;
+package models.Interfaces.adapters;
 
 public interface IAdapterAutenticator {
 
-    boolean login();
+    boolean login(String email, String password);
 
 }

@@ -1,16 +1,19 @@
 package models;
 
+import models.enums.ExigenciaMuscular;
+import models.enums.GrupoMuscular;
+
 public class Ejercicio {
 
     private Integer series;
     private Integer repeticiones;
     private Float pesoAsignado;
     private Integer nivelAerobico;
-    private String exigenciaMuscular;
+    private ExigenciaMuscular exigenciaMuscular;
     private GrupoMuscular grupoMuscular;
     private String videoUrl;
 
-    public Ejercicio(Integer series, Integer repeticiones, Float pesoAsignado, Integer nivelAerobico, String exigenciaMuscular, GrupoMuscular grupoMuscular, String videoUrl) {
+    public Ejercicio(Integer series, Integer repeticiones, Float pesoAsignado, Integer nivelAerobico, ExigenciaMuscular exigenciaMuscular, GrupoMuscular grupoMuscular, String videoUrl) {
         this.series = series;
         this.repeticiones = repeticiones;
         this.pesoAsignado = pesoAsignado;
@@ -36,7 +39,7 @@ public class Ejercicio {
         return nivelAerobico;
     }
 
-    public String getExigenciaMuscular() {
+    public ExigenciaMuscular getExigenciaMuscular() {
         return exigenciaMuscular;
     }
 

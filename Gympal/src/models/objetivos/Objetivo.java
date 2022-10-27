@@ -1,6 +1,10 @@
-package models;
+package models.objetivos;
 
-public abstract class Objetivo {
+import models.Interfaces.IObserver;
+import models.Rutina;
+import models.Socio;
+
+public abstract class Objetivo implements IObserver {
 
     private Socio socio;
     private Float pesoInicial;
@@ -21,4 +25,5 @@ public abstract class Objetivo {
     public void setRutina(Rutina rutina) {
         this.rutina = rutina;
     }
+
 }
