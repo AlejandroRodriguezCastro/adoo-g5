@@ -6,6 +6,8 @@ import models.Interfaces.IObserver;
 import java.util.Calendar;
 import java.util.List;
 
+import adapter.AdapterBalanzaGimnasio;
+
 public class Medicion implements IObservable {
 
     private Float peso;
@@ -14,11 +16,12 @@ public class Medicion implements IObservable {
     private Calendar fecha;
     private List<IObserver> observers;
 
-    public Medicion(Float peso, Float masaMuscular, Float porcentajeGrasaCorporal, Calendar fecha) {
-        this.peso = peso;
-        this.masaMuscular = masaMuscular;
-        this.porcentajeGrasaCorporal = porcentajeGrasaCorporal;
-        this.fecha = fecha;
+    public Medicion() {
+    }
+
+	public float obtenerMedicion() {
+		AdapterBalanzaGimnasio a = new AdapterBalanzaGimnasio();
+		return a.obtenerPeso();
     }
 
     public Float getPeso() {
@@ -51,4 +54,23 @@ public class Medicion implements IObservable {
     public void notificar() {
         observers.forEach(observer -> observer.serNotificadoPor(this));
     }
+
+	public void setPeso(Float peso) {
+		this.peso = peso;
+	}
+
+	public void setMasaMuscular(Float masaMuscular) {
+		this.masaMuscular = masaMuscular;
+	}
+
+	public void setPorcentajeGrasaCorporal(Float porcentajeGrasaCorporal) {
+		this.porcentajeGrasaCorporal = porcentajeGrasaCorporal;
+	}
+
+	public void setFecha(Calendar fecha) {
+		this.fecha = fecha;
+	}
+
+
+
 }

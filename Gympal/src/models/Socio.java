@@ -1,5 +1,6 @@
 package models;
 
+import adapter.LoginAdapter;
 import models.Interfaces.adapters.IAdapterAutenticator;
 import models.objetivos.Objetivo;
 
@@ -19,6 +20,8 @@ public class Socio {
     private List<Trofeo> trofeos;
     private IAdapterAutenticator autenticador;
 
+    public Socio(){}
+
     public Socio(String nombre, String apellido, String nroSocio, String documento, Integer edad, String sexo, Float altura) {
         this.nombre = nombre;
         this.apellido = apellido;
@@ -29,10 +32,13 @@ public class Socio {
         this.altura = altura;
     }
 
-    public void setearObjetvo(Objetivo objetivo){
+    public void setearObjetvo(Objetivo objetivo) {
         this.objetivo = objetivo;
-        return;
     }
+
+    public void setMediciones(List<Medicion> mediciones) {
+		this.mediciones = mediciones;
+	}
 
     public void realziarMedicion(){
         return;
@@ -84,4 +90,21 @@ public class Socio {
     public IAdapterAutenticator getAutenticador() {
         return autenticador;
     }
+
+	public void setNroSocio(String nroSocio) {
+		this.nroSocio = nroSocio;
+	}
+
+    public boolean login(String user, String passwd) {
+		LoginAdapter loginAdapter = new LoginAdapter();
+		return loginAdapter.login(user, passwd);
+    }
+
+	@Override
+	public String toString() {
+		return "Socio [nombre=" + nombre + ", apellido=" + apellido + ", nroSocio=" + nroSocio + ", documento="
+				+ documento + ", edad=" + edad + ", sexo=" + sexo + ", altura=" + altura + "]";
+	}
+
+
 }

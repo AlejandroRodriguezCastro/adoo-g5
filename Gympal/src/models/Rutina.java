@@ -4,6 +4,8 @@ import models.enums.Dias;
 
 import java.util.List;
 
+import models.enums.Dias;
+
 public class Rutina {
     private Entrenamiento entrenamiento;
     private List<Dias> diasDeEntrenamiento;
