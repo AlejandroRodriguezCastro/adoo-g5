@@ -21,7 +21,7 @@ public class test {
 		
 		Socio socio = new Socio();
 		if(socio.login(usuario,password)) {
-			socio = dataSets.getUsuarios().stream().filter(socio1 -> socio1.getNroSocio().equals(usuario)).findFirst().orElse(null);
+			socio = dataSets.getUsuario(usuario);
 			assert socio != null;
 			Menu.menuSocio(socio);
 		}else
