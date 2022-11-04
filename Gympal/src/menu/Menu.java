@@ -3,14 +3,14 @@ package menu;
 import java.util.Scanner;
 
 import models.Medicion;
-import models.Socio;
+import valueObject.SocioDto;
 
 public class Menu{
 
 	private static Medicion medicion;
 
 	
-	public static void menuSocio(Socio socio) {
+	public static void menuSocio(SocioDto socio) {
 		int opcion = 0;
 		Scanner sc = new Scanner(System.in);
 		medicion = new Medicion();

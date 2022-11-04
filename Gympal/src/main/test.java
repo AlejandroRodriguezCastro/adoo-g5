@@ -2,9 +2,11 @@ package main;
 
 import java.util.Scanner;
 
+import controllers.SocioController;
 import dataSets.DataSets;
 import menu.Menu;
 import models.Socio;
+import valueObject.SocioDto;
 
 public class test {
 
@@ -19,11 +21,14 @@ public class test {
         System.out.println("Ingrese su contrasenia:");
         String password = sc.nextLine();
 		
-		Socio socio = new Socio();
-		if(socio.login(usuario,password)) {
-			socio = dataSets.getUsuarios().stream().filter(socio1 -> socio1.getNroSocio().equals(usuario)).findFirst().orElse(null);
-			assert socio != null;
-			Menu.menuSocio(socio);
+		SocioDto socio = new SocioDto();
+		socio.setNroSocio(usuario);
+		socio.setPasswd(password);
+		
+		SocioController s = new SocioController();
+		
+		if(s.loguin(socio)!=null) {
+			Menu.menuSocio(s.loguin(socio));
 		}else
 			System.out.println("Ingreso Erroneo: ");
 		

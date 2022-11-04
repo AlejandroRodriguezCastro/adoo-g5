@@ -7,7 +7,7 @@ import models.Socio;
 public class DataSets {
 
 	private static DataSets dataSet;
-	private ArrayList<Socio> usuarios;
+	private static ArrayList<Socio> usuarios;
 	
 	private DataSets() {
 		usuarios = new ArrayList<>();
@@ -29,7 +29,7 @@ public class DataSets {
 		return dataSet;
 	}
 
-	public ArrayList<Socio> getUsuarios() {
-		return this.usuarios;
+	public static ArrayList<Socio> getUsuarios() {
+		return usuarios;
 	}
 }
