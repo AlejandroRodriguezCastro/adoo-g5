@@ -28,7 +28,7 @@ public class test {
 		SocioController s = new SocioController();
 		
 		if(s.loguin(socio)!=null) {
-			Menu.menuSocio(s.loguin(socio));
+			SocioController.menuSocio(s.loguin(socio));
 		}else
 			System.out.println("Ingreso Erroneo: ");
 		

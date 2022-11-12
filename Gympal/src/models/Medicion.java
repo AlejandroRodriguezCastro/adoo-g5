@@ -2,14 +2,23 @@ package models;
 
 import models.Interfaces.IObservable;
 import models.Interfaces.IObserver;
+import models.Interfaces.adapters.IAdapterPeso;
 
 import java.util.Calendar;
 import java.util.List;
 
 import adapter.AdapterBalanzaGimnasio;
+import adapter.LoginAdapter;
 
 public class Medicion implements IObservable {
 
+	@Override
+	public String toString() {
+		return "Medicion [peso=" + peso + ", masaMuscular=" + masaMuscular + ", porcentajeGrasaCorporal="
+				+ porcentajeGrasaCorporal + "]";
+	}
+
+	private IAdapterPeso adapterPeso;
     private Float peso;
     private Float masaMuscular;
     private Float porcentajeGrasaCorporal;
@@ -17,11 +26,11 @@ public class Medicion implements IObservable {
     private List<IObserver> observers;
 
     public Medicion() {
+    	this.adapterPeso = new AdapterBalanzaGimnasio();
     }
 
 	public float obtenerMedicion() {
-		AdapterBalanzaGimnasio a = new AdapterBalanzaGimnasio();
-		return a.obtenerPeso();
+		return this.adapterPeso.obtenerPeso();
     }
 
     public Float getPeso() {

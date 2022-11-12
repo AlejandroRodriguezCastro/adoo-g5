@@ -7,9 +7,9 @@ import models.Socio;
 public class DataSets {
 
 	private static DataSets dataSet;
-	private static ArrayList<Socio> usuarios;
+	protected static ArrayList<Socio> usuarios;
 	
-	private DataSets() {
+	protected DataSets() {
 		usuarios = new ArrayList<>();
 
 		// SOCIOS
@@ -31,5 +31,9 @@ public class DataSets {
 
 	public static ArrayList<Socio> getUsuarios() {
 		return usuarios;
+	}
+
+	public static void setUsuarios(ArrayList<Socio> usuarios) {
+		DataSets.usuarios = usuarios;
 	}
 }
