@@ -1,11 +1,10 @@
 package models;
 
 import adapter.LoginAdapter;
-import dataSets.DataSets;
 import models.Interfaces.adapters.IAdapterAutenticator;
 import models.objetivos.Objetivo;
-import valueObject.SocioDto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Socio {
@@ -35,6 +34,7 @@ public class Socio {
 		this.edad = edad;
 		this.sexo = sexo;
 		this.altura = altura;
+		this.mediciones = new ArrayList<>();
 	}
 
 	public void setearObjetvo(Objetivo objetivo) {
@@ -95,22 +95,6 @@ public class Socio {
 
 	public void setNroSocio(String nroSocio) {
 		this.nroSocio = nroSocio;
-	}
-
-	public SocioDto login(String user, String passwd) {
-		SocioDto s = new SocioDto();
-		if (this.autenticador.loguin(user, passwd)) {
-			for (Socio ss : DataSets.getUsuarios()) {
-				if (ss.getNroSocio().equals(user)) {
-					s.setNombre(ss.getNombre());
-					s.setApellido(ss.getApellido());
-					s.setNroSocio(ss.getNroSocio());
-					return s;
-				}
-			}
-
-		}
-		return null;
 	}
 
 	@Override

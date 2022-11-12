@@ -1,105 +1,45 @@
 package controllers;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Scanner;
 
+import adapter.LoginAdapter;
 import dataSets.DataSets;
+import models.Interfaces.adapters.IAdapterAutenticator;
 import models.Medicion;
 import models.Socio;
 import valueObject.SocioDto;
 
-public class SocioController extends DataSets {
+public class SocioController{
 
-	private static Socio socio;
-	private static Medicion medicion;
-	private static SocioDto socioDto;
-	private static List<Medicion> mediciones;
+	private static final DataSets dataSets = DataSets.getDataSet();
+	private static Socio socio = new Socio();
+	private final IAdapterAutenticator autenticador = new LoginAdapter();
 
-	public SocioController() {
-		super();
-		this.socio = new Socio();
-		mediciones = new ArrayList<>();
+	public boolean login(SocioDto socioDto) {
+		 if (autenticador.login(socioDto.getNroSocio(), socioDto.getPasswd())){
+			 socio = dataSets.getSocioByNroSocio(socioDto.getNroSocio());
+			 return true;
+		 }
+		 return false;
 	}
 
-	public SocioDto loguin(SocioDto s) {
-		return this.socio.login(s.getNroSocio(), s.getPasswd());
+	public static void listar() {
+		System.out.println(socio);
 	}
 
-	public static void menuSocio(SocioDto s) {
-		int opcion = 0;
-		Scanner sc = new Scanner(System.in);
-		socioDto = new SocioDto();
-		socioDto = s;
-		for (Socio ss : usuarios) {
-			if (ss.getNroSocio().equals(socioDto.getNroSocio()))
-				socio = ss;
-		}
-
-		if (socio.getMediciones() != null)
-			mediciones = socio.getMediciones();
-
-		do {
-			System.out.println();
-			System.out.println("********************* BIENVENIDO *********************");
-			System.out.println("******************" + s.getNombre() + " " + s.getApellido() + "********************");
-			System.out.println("******************************************************");
-			System.out.println("1- DATOS PERSONALES");
-			System.out.println("2- ELEGIR OBJETIVO");
-			System.out.println("3- PESARME");
-			System.out.println("4- COMENZAR ENTRENAMIENTO");
-			System.out.println("5- REGISTRAR PESAJE");
-			System.out.println("6- MIS TROFEOS");
-			System.out.println("0- SALIR");
-
-			System.out.println("******************************************************");
-			System.out.println("******************************************************");
-			System.out.println("******************************************************");
-
-			System.out.println();
-			System.out.println("ELIJA UNA OPCION:");
-
-			opcion = sc.nextInt();
-
-			switch (opcion) {
-			case 1:
-				System.out.println(s.toString());
-				break;
-			case 3:
-				pesarSocio();
-				listar();
-				break;
-			}
-
-		} while (opcion != 0);
-
-	}
-
-	private static void listar() {
-		for (Socio s : usuarios) {
-			if (s.getNroSocio().equals(socio.getNroSocio()))
-				System.out.println(s.toString());
-		}
-
-	}
-
-	private static void pesarSocio() {
-		medicion = new Medicion();
+	public static void pesarSocio() {
+		Medicion medicion = new Medicion();
+		List<Medicion> mediciones = socio.getMediciones();
 		medicion.setPeso(medicion.obtenerMedicion());
 		Calendar c1 = Calendar.getInstance();
 		System.out.println(
 				"Fecha: " + c1.get(Calendar.DATE) + "/" + c1.get(Calendar.MONTH) + "/" + c1.get(Calendar.YEAR));
-		medicion.setFecha(c1.getInstance());
+		medicion.setFecha(Calendar.getInstance());
 		System.out.println("Tu peso es: " + medicion.getPeso());
 		mediciones.add(medicion);
 		socio.setMediciones(mediciones);
-		guardarSocio(socio);
-	}
-
-	private static void guardarSocio(Socio s) {
-		usuarios.remove(s);
-		usuarios.add(s);
+		dataSets.guardarSocio(socio);
 	}
 
 }

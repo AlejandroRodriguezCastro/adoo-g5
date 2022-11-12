@@ -11,6 +11,5 @@ public class AdapterBalanzaGimnasio implements IAdapterPeso {
 		Random rand = new Random();
 	    return rand.nextFloat() * (100 - 60) + 60;
 	}
-	
 
 }
