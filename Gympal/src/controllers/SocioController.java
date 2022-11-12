@@ -68,7 +68,7 @@ public class SocioController extends DataSets {
 				break;
 			case 3:
 				pesarSocio();
-				//listar();
+				listar();
 				break;
 			}
 

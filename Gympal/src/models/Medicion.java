@@ -12,10 +12,12 @@ import adapter.LoginAdapter;
 
 public class Medicion implements IObservable {
 
+
+
 	@Override
 	public String toString() {
 		return "Medicion [peso=" + peso + ", masaMuscular=" + masaMuscular + ", porcentajeGrasaCorporal="
-				+ porcentajeGrasaCorporal + "]";
+				+ porcentajeGrasaCorporal + ", fecha=" + fecha.get(Calendar.DATE) + "/" + fecha.get(Calendar.MONTH) + "/" + fecha.get(Calendar.YEAR) + "]";
 	}
 
 	private IAdapterPeso adapterPeso;
