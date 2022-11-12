@@ -37,8 +37,8 @@ public class SocioController extends DataSets {
 				socio = ss;
 		}
 
-		if(socio.getMediciones()!=null)
-		mediciones = socio.getMediciones();
+		if (socio.getMediciones() != null)
+			mediciones = socio.getMediciones();
 
 		do {
 			System.out.println();
@@ -78,7 +78,8 @@ public class SocioController extends DataSets {
 
 	private static void listar() {
 		for (Socio s : usuarios) {
-			System.out.println(s.toString());
+			if (s.getNroSocio().equals(socio.getNroSocio()))
+				System.out.println(s.toString());
 		}
 
 	}
@@ -87,7 +88,8 @@ public class SocioController extends DataSets {
 		medicion = new Medicion();
 		medicion.setPeso(medicion.obtenerMedicion());
 		Calendar c1 = Calendar.getInstance();
-		System.out.println("Fecha: " + Calendar.DATE);
+		System.out.println(
+				"Fecha: " + c1.get(Calendar.DATE) + "/" + c1.get(Calendar.MONTH) + "/" + c1.get(Calendar.YEAR));
 		medicion.setFecha(c1.getInstance());
 		System.out.println("Tu peso es: " + medicion.getPeso());
 		mediciones.add(medicion);
