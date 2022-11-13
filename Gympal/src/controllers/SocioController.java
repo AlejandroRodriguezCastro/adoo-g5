@@ -14,11 +14,13 @@ public class SocioController{
 
 	private static final DataSets dataSets = DataSets.getDataSet();
 	private static Socio socio = new Socio();
-	private final IAdapterAutenticator autenticador = new LoginAdapter();
+	private static final IAdapterAutenticator autenticador = new LoginAdapter();
 
-	public boolean login(SocioDto socioDto) {
+	public static boolean login(SocioDto socioDto) {
 		 if (autenticador.login(socioDto.getNroSocio(), socioDto.getPasswd())){
 			 socio = dataSets.getSocioByNroSocio(socioDto.getNroSocio());
+			 socioDto.setNombre(socio.getNombre());
+			 socioDto.setApellido(socio.getApellido());
 			 return true;
 		 }
 		 return false;
