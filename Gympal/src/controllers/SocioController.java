@@ -1,5 +1,6 @@
 package controllers;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -9,6 +10,7 @@ import models.Interfaces.adapters.IAdapterAutenticator;
 import models.Medicion;
 import models.Socio;
 import models.objetivos.Objetivo;
+import valueObject.MedicionDto;
 import valueObject.SocioDto;
 
 public class SocioController{
@@ -33,15 +35,9 @@ public class SocioController{
 	}
 
 	public static void pesarSocio() {
-		Medicion medicion = new Medicion();
-		List<Medicion> mediciones = socio.getMediciones();
-		medicion.setPeso(medicion.obtenerMedicion());
-		Calendar c1 = Calendar.getInstance();
-		System.out.println(
-				"Fecha: " + c1.get(Calendar.DATE) + "/" + c1.get(Calendar.MONTH) + "/" + c1.get(Calendar.YEAR));
-		medicion.setFecha(Calendar.getInstance());
-		System.out.println("Tu peso es: " + medicion.getPeso());
-		mediciones.add(medicion);
+		List<Medicion> mediciones = new ArrayList<>();
+		mediciones = socio.getMediciones();
+		mediciones.add(MedicionController.nuevaMedicion(socio.realizarMedicion()));
 		socio.setMediciones(mediciones);
 		dataSets.guardarSocio(socio);
 	}

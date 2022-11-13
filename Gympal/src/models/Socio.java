@@ -1,10 +1,13 @@
 package models;
 
 import adapter.LoginAdapter;
+import controllers.MedicionController;
 import models.Interfaces.adapters.IAdapterAutenticator;
 import models.objetivos.Objetivo;
+import valueObject.MedicionDto;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class Socio {
@@ -45,8 +48,18 @@ public class Socio {
 		this.mediciones = mediciones;
 	}
 
-	public void realziarMedicion() {
-		return;
+	public MedicionDto realizarMedicion() {
+		
+		return MedicionController.realizarMedicion();
+
+		/*System.out.println(
+				"Fecha: " + c1.get(Calendar.DATE) + "/" + c1.get(Calendar.MONTH) + "/" + c1.get(Calendar.YEAR));
+		medicion.setFecha(Calendar.getInstance());
+		System.out.println("Tu peso es: " + medicion.getPeso());
+		mediciones.add(medicion);
+		socio.setMediciones(mediciones);
+		return null;*/
+		
 	}
 
 	public String getNombre() {
