@@ -101,6 +101,7 @@ public class Socio {
 	public String toString() {
 		return "\nSocio [nombre=" + nombre + ", apellido=" + apellido + ", nroSocio=" + nroSocio + ", documento="
 				+ documento + ", edad=" + edad + ", sexo=" + sexo + ", altura=" + altura + ", \n mediciones=" + mediciones
+				+ ", \n objetivo=" + objetivo
 				+ "]";
 	}
 	
