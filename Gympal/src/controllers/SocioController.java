@@ -8,6 +8,7 @@ import dataSets.DataSets;
 import models.Interfaces.adapters.IAdapterAutenticator;
 import models.Medicion;
 import models.Socio;
+import models.objetivos.Objetivo;
 import valueObject.SocioDto;
 
 public class SocioController{
@@ -21,6 +22,7 @@ public class SocioController{
 			 socio = dataSets.getSocioByNroSocio(socioDto.getNroSocio());
 			 socioDto.setNombre(socio.getNombre());
 			 socioDto.setApellido(socio.getApellido());
+			 socioDto.setTieneObjetivo(socio.getObjetivo() != null);
 			 return true;
 		 }
 		 return false;
@@ -42,6 +44,10 @@ public class SocioController{
 		mediciones.add(medicion);
 		socio.setMediciones(mediciones);
 		dataSets.guardarSocio(socio);
+	}
+
+	public static void setearObjetivo(Objetivo objetivo) {
+		socio.setearObjetvo(objetivo);
 	}
 
 }
