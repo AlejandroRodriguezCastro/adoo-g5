@@ -3,8 +3,10 @@ package models;
 import adapter.LoginAdapter;
 import controllers.MedicionController;
 import models.Interfaces.adapters.IAdapterAutenticator;
+import models.enums.Genero;
 import models.objetivos.Objetivo;
 import valueObject.MedicionDto;
+import valueObject.SocioDto;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -17,7 +19,7 @@ public class Socio {
 	private String nroSocio;
 	private String documento;
 	private Integer edad;
-	private String sexo;
+	private Genero sexo;
 	private Float altura;
 	private List<Medicion> mediciones;
 	private Objetivo objetivo;
@@ -28,7 +30,7 @@ public class Socio {
 		this.autenticador = new LoginAdapter();
 	}
 
-	public Socio(String nombre, String apellido, String nroSocio, String documento, Integer edad, String sexo,
+	public Socio(String nombre, String apellido, String nroSocio, String documento, Integer edad, Genero sexo,
 			Float altura) {
 		this.nombre = nombre;
 		this.apellido = apellido;
@@ -49,17 +51,22 @@ public class Socio {
 	}
 
 	public MedicionDto realizarMedicion() {
-		
-		return MedicionController.realizarMedicion();
 
-		/*System.out.println(
-				"Fecha: " + c1.get(Calendar.DATE) + "/" + c1.get(Calendar.MONTH) + "/" + c1.get(Calendar.YEAR));
-		medicion.setFecha(Calendar.getInstance());
-		System.out.println("Tu peso es: " + medicion.getPeso());
-		mediciones.add(medicion);
-		socio.setMediciones(mediciones);
-		return null;*/
-		
+		SocioDto socioDto = new SocioDto();
+		socioDto.setAltura(this.altura);
+		socioDto.setEdad(this.edad);
+		socioDto.setSexo(this.sexo);
+
+		return MedicionController.realizarMedicion(socioDto);
+
+		/*
+		 * System.out.println( "Fecha: " + c1.get(Calendar.DATE) + "/" +
+		 * c1.get(Calendar.MONTH) + "/" + c1.get(Calendar.YEAR));
+		 * medicion.setFecha(Calendar.getInstance()); System.out.println("Tu peso es: "
+		 * + medicion.getPeso()); mediciones.add(medicion);
+		 * socio.setMediciones(mediciones); return null;
+		 */
+
 	}
 
 	public String getNombre() {
@@ -82,7 +89,7 @@ public class Socio {
 		return edad;
 	}
 
-	public String getSexo() {
+	public Genero getSexo() {
 		return sexo;
 	}
 
@@ -113,10 +120,8 @@ public class Socio {
 	@Override
 	public String toString() {
 		return "\nSocio [nombre=" + nombre + ", apellido=" + apellido + ", nroSocio=" + nroSocio + ", documento="
-				+ documento + ", edad=" + edad + ", sexo=" + sexo + ", altura=" + altura + ", \n mediciones=" + mediciones
-				+ ", \n objetivo=" + objetivo
-				+ "]";
+				+ documento + ", edad=" + edad + ", sexo=" + sexo + ", altura=" + altura + ", \n mediciones="
+				+ mediciones + ", \n objetivo=" + objetivo + "]";
 	}
-	
 
 }

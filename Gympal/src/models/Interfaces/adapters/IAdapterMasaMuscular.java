@@ -1,5 +1,5 @@
 package models.Interfaces.adapters;
 
 public interface IAdapterMasaMuscular {
-    Float obtenerMasaMuscular();
+	Float obtenerMasaMuscular(float peso, float estatura);
 }

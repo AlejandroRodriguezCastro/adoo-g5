@@ -2,69 +2,84 @@ package models;
 
 import models.Interfaces.IObservable;
 import models.Interfaces.IObserver;
+import models.Interfaces.adapters.IAdapterMasaMuscular;
 import models.Interfaces.adapters.IAdapterPeso;
+import models.Interfaces.adapters.IAdapterPorcentajeGrasa;
+import models.enums.Genero;
 
 import java.util.Calendar;
 import java.util.List;
 
 import adapter.AdapterBalanzaGimnasio;
-import adapter.LoginAdapter;
+import adapter.AdapterGrasaCorporal;
+import adapter.AdapterMasaMuscular;
 
 public class Medicion implements IObservable {
-
-
 
 	@Override
 	public String toString() {
 		return "\n Medicion [peso=" + peso + ", masaMuscular=" + masaMuscular + ", porcentajeGrasaCorporal="
-				+ porcentajeGrasaCorporal + ", fecha=" + fecha.get(Calendar.DATE) + "/" + fecha.get(Calendar.MONTH) + "/" + fecha.get(Calendar.YEAR) + "]";
+				+ porcentajeGrasaCorporal + ", fecha=" + fecha.get(Calendar.DATE) + "/" + fecha.get(Calendar.MONTH)
+				+ "/" + fecha.get(Calendar.YEAR) + "]";
 	}
 
 	private IAdapterPeso adapterPeso;
-    private Float peso;
-    private Float masaMuscular;
-    private Float porcentajeGrasaCorporal;
-    private Calendar fecha;
-    private List<IObserver> observers;
+	private IAdapterPorcentajeGrasa adapterGrasa;
+	private IAdapterMasaMuscular adapterMasaMuscular;
+	private Float peso;
+	private Float masaMuscular;
+	private Float porcentajeGrasaCorporal;
+	private Calendar fecha;
+	private List<IObserver> observers;
 
-    public Medicion() {
-    	this.adapterPeso = new AdapterBalanzaGimnasio();
-    }
+	public Medicion() {
+		this.adapterPeso = new AdapterBalanzaGimnasio();
+		this.adapterGrasa = new AdapterGrasaCorporal();
+		this.adapterMasaMuscular = new AdapterMasaMuscular();
+	}
 
 	public float obtenerMedicion() {
 		return this.adapterPeso.obtenerPeso();
-    }
+	}
 
-    public Float getPeso() {
-        return peso;
-    }
+	public float obtenerGrasaCorporal(float imc, int edad, Genero genero) {
+		return this.adapterGrasa.obtenerPorcentajeGrasaCorporal(imc, edad, genero);
+	}
 
-    public Float getMasaMuscular() {
-        return masaMuscular;
-    }
+	public float obtenerMasaMuscular(float peso, float estatura) {
+		return this.adapterMasaMuscular.obtenerMasaMuscular(peso, estatura);
+	}
 
-    public Float getPorcentajeGrasaCorporal() {
-        return porcentajeGrasaCorporal;
-    }
+	public Float getPeso() {
+		return peso;
+	}
 
-    public Calendar getFecha() {
-        return fecha;
-    }
+	public Float getMasaMuscular() {
+		return masaMuscular;
+	}
 
-    @Override
-    public void agregar(IObserver observer) {
-        observers.add(observer);
-    }
+	public Float getPorcentajeGrasaCorporal() {
+		return porcentajeGrasaCorporal;
+	}
 
-    @Override
-    public void eliminar(IObserver observer) {
-        observers.remove(observer);
-    }
+	public Calendar getFecha() {
+		return fecha;
+	}
 
-    @Override
-    public void notificar() {
-        observers.forEach(observer -> observer.serNotificadoPor(this));
-    }
+	@Override
+	public void agregar(IObserver observer) {
+		observers.add(observer);
+	}
+
+	@Override
+	public void eliminar(IObserver observer) {
+		observers.remove(observer);
+	}
+
+	@Override
+	public void notificar() {
+		observers.forEach(observer -> observer.serNotificadoPor(this));
+	}
 
 	public void setPeso(Float peso) {
 		this.peso = peso;
@@ -81,7 +96,5 @@ public class Medicion implements IObservable {
 	public void setFecha(Calendar fecha) {
 		this.fecha = fecha;
 	}
-
-
 
 }
