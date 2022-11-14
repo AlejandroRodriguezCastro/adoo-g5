@@ -2,7 +2,6 @@ package controllers;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import adapter.LoginAdapter;
 import dataSets.DataSets;
 import models.Interfaces.adapters.IAdapterAutenticator;
@@ -27,6 +26,13 @@ public class SocioController {
 		}
 		return false;
 	}
+	
+	public static boolean exists(SocioDto socioDto) {
+		if (dataSets.getSocioByDocumento(socioDto.getDocumento()) != null){
+			return true;
+		}
+		return false;
+	}
 
 	public static void listar() {
 		System.out.println(socio);
@@ -42,6 +48,13 @@ public class SocioController {
 
 	public static void setearObjetivo(Objetivo objetivo) {
 		socio.setearObjetvo(objetivo);
+	}
+
+	public static String nuevoSocio(SocioDto socioDto) {
+		socio = new Socio(socioDto);
+		dataSets.guardarSocio(socio);
+		autenticador.register(socio.getNroSocio(),socioDto.getPasswd());
+		return socio.getNroSocio();
 	}
 
 }

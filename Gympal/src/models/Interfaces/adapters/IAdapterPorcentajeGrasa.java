@@ -1,7 +1,7 @@
 package models.Interfaces.adapters;
 
-import models.enums.Genero;
+import models.enums.Sexo;
 
 public interface IAdapterPorcentajeGrasa {
-    Float obtenerPorcentajeGrasaCorporal(float imc, int edad, Genero genero);
+    Float obtenerPorcentajeGrasaCorporal(float imc, int edad, Sexo sexo);
 }
