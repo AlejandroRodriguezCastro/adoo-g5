@@ -1,6 +1,10 @@
 package valueObject;
 
-import models.enums.Genero;
+import java.util.List;
+
+import models.Medicion;
+import models.enums.Sexo;
+import models.objetivos.Objetivo;
 
 public class SocioDto {
 
@@ -9,10 +13,24 @@ public class SocioDto {
 	private String nroSocio;
 	private String documento;
 	private Integer edad;
-	private Genero sexo;
+	private Sexo sexo;
 	private Float altura;
 	private String passwd;
 	private Boolean tieneObjetivo;
+
+	public SocioDto(String nombre2, String apellido2, String nroSocio2, String documento2, Integer edad2, Sexo sexo2,
+			Float altura2) {
+		this.nombre = nombre2;
+		this.apellido = apellido2;
+		this.nroSocio = nroSocio2;
+		this.documento = documento2;
+		this.edad = edad2;
+		this.sexo = sexo2;
+		this.altura = altura2; 
+	}
+
+	public SocioDto() {
+	}
 
 	public String getPasswd() {
 		return passwd;
@@ -62,11 +80,11 @@ public class SocioDto {
 		this.edad = edad;
 	}
 
-	public Genero getSexo() {
+	public Sexo getSexo() {
 		return sexo;
 	}
 
-	public void setSexo(Genero sexo) {
+	public void setSexo(Sexo sexo) {
 		this.sexo = sexo;
 	}
 

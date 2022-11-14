@@ -3,23 +3,22 @@ package models;
 import adapter.LoginAdapter;
 import controllers.MedicionController;
 import models.Interfaces.adapters.IAdapterAutenticator;
-import models.enums.Genero;
+import models.enums.Sexo;
 import models.objetivos.Objetivo;
 import valueObject.MedicionDto;
 import valueObject.SocioDto;
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
 public class Socio {
-
+	private static int Socios = 123456;
 	private String nombre;
 	private String apellido;
 	private String nroSocio;
 	private String documento;
 	private Integer edad;
-	private Genero sexo;
+	private Sexo sexo;
 	private Float altura;
 	private List<Medicion> mediciones;
 	private Objetivo objetivo;
@@ -30,7 +29,7 @@ public class Socio {
 		this.autenticador = new LoginAdapter();
 	}
 
-	public Socio(String nombre, String apellido, String nroSocio, String documento, Integer edad, Genero sexo,
+	public Socio(String nombre, String apellido, String nroSocio, String documento, Integer edad, Sexo sexo,
 			Float altura) {
 		this.nombre = nombre;
 		this.apellido = apellido;
@@ -39,6 +38,31 @@ public class Socio {
 		this.edad = edad;
 		this.sexo = sexo;
 		this.altura = altura;
+		this.mediciones = new ArrayList<>();
+	}
+	
+	public Socio(String nombre, String apellido, String documento, Integer edad, Sexo sexo,
+			Float altura) {
+		Socios+=1;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.nroSocio = Integer.toString(Socios);
+		this.documento = documento;
+		this.edad = edad;
+		this.sexo = sexo;
+		this.altura = altura;
+		this.mediciones = new ArrayList<>();
+	}
+
+	public Socio(SocioDto socioDto) {
+		Socios+=1;
+		this.nombre = socioDto.getNombre();
+		this.apellido = socioDto.getApellido();
+		this.nroSocio = Integer.toString(Socios);
+		this.documento = socioDto.getDocumento();
+		this.edad = socioDto.getEdad();
+		this.sexo = socioDto.getSexo();
+		this.altura = socioDto.getAltura();
 		this.mediciones = new ArrayList<>();
 	}
 
@@ -89,7 +113,7 @@ public class Socio {
 		return edad;
 	}
 
-	public Genero getSexo() {
+	public Sexo getSexo() {
 		return sexo;
 	}
 
@@ -122,6 +146,11 @@ public class Socio {
 		return "\nSocio [nombre=" + nombre + ", apellido=" + apellido + ", nroSocio=" + nroSocio + ", documento="
 				+ documento + ", edad=" + edad + ", sexo=" + sexo + ", altura=" + altura + ", \n mediciones="
 				+ mediciones + ", \n objetivo=" + objetivo + "]";
+	}
+	
+	public SocioDto getSocioDto() {
+		SocioDto socio = new SocioDto(nombre,apellido,nroSocio,documento,edad,sexo,altura);
+		return socio;
 	}
 
 }

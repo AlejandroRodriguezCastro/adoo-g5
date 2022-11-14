@@ -1,15 +1,13 @@
 package models.enums;
 
-public enum Genero {
-    MASCULINO, FEMENINO, OTRO;
+public enum Sexo {
+    MASCULINO, FEMENINO;
 
-    public static Genero fromInteger(int x) {
+    public static Sexo fromInteger(int x) {
     	switch(x) {
     	case 0: return MASCULINO;
     	case 1: return FEMENINO;
-    	case 2: return OTRO;
     	}
-    	
     	return null;
     }
 }

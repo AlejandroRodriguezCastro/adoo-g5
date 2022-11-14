@@ -5,7 +5,7 @@ import models.Interfaces.IObserver;
 import models.Interfaces.adapters.IAdapterMasaMuscular;
 import models.Interfaces.adapters.IAdapterPeso;
 import models.Interfaces.adapters.IAdapterPorcentajeGrasa;
-import models.enums.Genero;
+import models.enums.Sexo;
 
 import java.util.Calendar;
 import java.util.List;
@@ -42,8 +42,8 @@ public class Medicion implements IObservable {
 		return this.adapterPeso.obtenerPeso();
 	}
 
-	public float obtenerGrasaCorporal(float imc, int edad, Genero genero) {
-		return this.adapterGrasa.obtenerPorcentajeGrasaCorporal(imc, edad, genero);
+	public float obtenerGrasaCorporal(float imc, int edad, Sexo sexo ) {
+		return this.adapterGrasa.obtenerPorcentajeGrasaCorporal(imc, edad, sexo);
 	}
 
 	public float obtenerMasaMuscular(float peso, float estatura) {

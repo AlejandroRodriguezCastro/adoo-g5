@@ -17,4 +17,7 @@ public class LoginAdapter implements IAdapterAutenticator {
 	public boolean login(String user, String password) {
 		return usuarios.containsKey(user) && usuarios.get(user).equals(password);
 	}
+	public void register(String user, String password) {
+		usuarios.put(user, password);
+	}
 }
