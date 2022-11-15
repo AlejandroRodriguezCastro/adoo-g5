@@ -8,6 +8,7 @@ import models.Interfaces.adapters.IAdapterAutenticator;
 import models.Medicion;
 import models.Socio;
 import models.objetivos.Objetivo;
+import valueObject.MedicionDto;
 import valueObject.SocioDto;
 
 public class SocioController {
@@ -42,6 +43,14 @@ public class SocioController {
 		List<Medicion> mediciones = new ArrayList<>();
 		mediciones = socio.getMediciones();
 		mediciones.add(MedicionController.nuevaMedicion(socio.realizarMedicion()));
+		socio.setMediciones(mediciones);
+		dataSets.guardarSocio(socio);
+	}
+	
+	public static void registrarPesaje(MedicionDto medicionDto) {
+		List<Medicion> mediciones = new ArrayList<>();
+		mediciones = socio.getMediciones();
+		mediciones.add(MedicionController.nuevaMedicion(medicionDto));
 		socio.setMediciones(mediciones);
 		dataSets.guardarSocio(socio);
 	}
