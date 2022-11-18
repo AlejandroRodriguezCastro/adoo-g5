@@ -58,6 +58,11 @@ public class SocioController {
 	public static void setearObjetivo(Objetivo objetivo) {
 		socio.setearObjetvo(objetivo);
 	}
+	
+	public static void comenzarEntrenamiento() {
+		socio.comenzarEntrenamiento();
+		dataSets.guardarSocio(socio);
+	}
 
 	public static String nuevoSocio(SocioDto socioDto) {
 		socio = new Socio(socioDto);

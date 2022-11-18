@@ -162,4 +162,9 @@ public class DataSets {
 	public Socio getSocioByDocumento(String documento) {
 		return usuarios.stream().filter(socio -> socio.getDocumento().equals(documento)).findFirst().orElse(null);
 	}
+
+	public static ArrayList<Ejercicio> getEjercicios() {
+		return ejercicios;
+	}
+	
 }

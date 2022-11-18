@@ -2,6 +2,7 @@ package models;
 
 import adapter.LoginAdapter;
 import controllers.MedicionController;
+import controllers.RutinaController;
 import models.Interfaces.adapters.IAdapterAutenticator;
 import models.enums.Sexo;
 import models.objetivos.Objetivo;
@@ -40,10 +41,9 @@ public class Socio {
 		this.altura = altura;
 		this.mediciones = new ArrayList<>();
 	}
-	
-	public Socio(String nombre, String apellido, String documento, Integer edad, Sexo sexo,
-			Float altura) {
-		Socios+=1;
+
+	public Socio(String nombre, String apellido, String documento, Integer edad, Sexo sexo, Float altura) {
+		Socios += 1;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.nroSocio = Integer.toString(Socios);
@@ -55,7 +55,7 @@ public class Socio {
 	}
 
 	public Socio(SocioDto socioDto) {
-		Socios+=1;
+		Socios += 1;
 		this.nombre = socioDto.getNombre();
 		this.apellido = socioDto.getApellido();
 		this.nroSocio = Integer.toString(Socios);
@@ -90,7 +90,18 @@ public class Socio {
 		 * + medicion.getPeso()); mediciones.add(medicion);
 		 * socio.setMediciones(mediciones); return null;
 		 */
+	}
 
+	public void comenzarEntrenamiento() {
+		if (this.objetivo.getRutina() == null) {
+			this.objetivo.setRutina(RutinaController.crearRutina(this.objetivo));
+			
+			System.out.println(this.objetivo.getRutina().toString());
+			
+			for(Entrenamiento e: this.objetivo.getRutina().getEntrenamientos()) {
+				System.out.println(e.toString());
+			}
+		}
 	}
 
 	public String getNombre() {
@@ -145,11 +156,11 @@ public class Socio {
 	public String toString() {
 		return "\nSocio [nombre=" + nombre + ", apellido=" + apellido + ", nroSocio=" + nroSocio + ", documento="
 				+ documento + ", edad=" + edad + ", sexo=" + sexo + ", altura=" + altura + ", \n mediciones="
-				+ mediciones + ", \n objetivo=" + objetivo + "]";
+				+ mediciones + "]";
 	}
-	
+
 	public SocioDto getSocioDto() {
-		SocioDto socio = new SocioDto(nombre,apellido,nroSocio,documento,edad,sexo,altura);
+		SocioDto socio = new SocioDto(nombre, apellido, nroSocio, documento, edad, sexo, altura);
 		return socio;
 	}
 

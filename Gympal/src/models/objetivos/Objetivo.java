@@ -26,4 +26,13 @@ public abstract class Objetivo implements IObserver {
         this.rutina = rutina;
     }
 
+	public abstract Rutina CrearRutina();
+
+	@Override
+	public String toString() {
+		return "Objetivo [rutina=" + rutina + "]";
+	}
+	
+	
+
 }

@@ -135,6 +135,10 @@ public class Menu {
 				subMenuPesarme();
 				// SocioController.listar();
 				break;
+			case 4:
+				SocioController.comenzarEntrenamiento();
+				SocioController.listar();
+				break;
 			}
 
 		} while (opcion != 7);

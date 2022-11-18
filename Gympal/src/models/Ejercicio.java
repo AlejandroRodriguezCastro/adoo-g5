@@ -26,6 +26,10 @@ public class Ejercicio {
 		this.videoUrl = videoUrl;
 	}
 
+	public Ejercicio() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public Integer getSeries() {
 		return series;
 	}
@@ -61,4 +65,13 @@ public class Ejercicio {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
+
+	@Override
+	public String toString() {
+		return "\nEjercicio [series=" + series + ", repeticiones=" + repeticiones + ", descripcion=" + descripcion
+				+ ", pesoAsignado=" + pesoAsignado + ", nivelAerobico=" + nivelAerobico + ", exigenciaMuscular="
+				+ exigenciaMuscular + ", grupoMuscular=" + grupoMuscular + ", videoUrl=" + videoUrl + "]";
+	}
+	
+	
 }
