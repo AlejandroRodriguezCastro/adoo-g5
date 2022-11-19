@@ -34,17 +34,17 @@ public class ObjetivoBajarDePeso extends Objetivo {
 		rutinaDto.setDuracion(28);
 
 		for (int dia = 1; dia <= rutinaDto.getDuracion(); dia++) {
-			
+
 			List<Ejercicio> ejercicios = new ArrayList<>();
 
 			if (dia == 1)
 				entrenamientoDto.setFechaAsignada(c1);
 			else {
-				c1.add(Calendar.DATE, 1);
+				c1.add(Calendar.DAY_OF_YEAR, dia);
 				entrenamientoDto.setFechaAsignada(c1);
 			}
 			entrenamientoDto.setDia(dia);
-			
+
 			List<Ejercicio> ejerciciosAuxiliares = new ArrayList<>();
 
 			for (Ejercicio e : RutinaController.ejerciciosBajarPeso()) {
@@ -82,43 +82,43 @@ public class ObjetivoBajarDePeso extends Objetivo {
 					}
 				}
 			}
-			
+
 			List<Integer> ejerciciosDisponibles = new ArrayList<>();
 			int ejerciciosAgregados = 0;
-			
-			for(int i = 0; i <= 999 ; i++) {
+
+			for (int i = 0; i <= 999; i++) {
 				int indiceAleatorio;
 				boolean repetido = false;
-				
+
 				indiceAleatorio = numeroAleatorioEnRango(0, ejerciciosAuxiliares.size() - 1);
-				
-				for(int j : ejerciciosDisponibles) {
-					if(j == indiceAleatorio)
+
+				for (int j : ejerciciosDisponibles) {
+					if (j == indiceAleatorio)
 						repetido = true;
 				}
-				
-				if(!repetido) {
+
+				if (!repetido) {
 					ejerciciosDisponibles.add(indiceAleatorio);
 					ejercicios.add(ejerciciosAuxiliares.get(indiceAleatorio));
-					ejerciciosAgregados ++;
+					ejerciciosAgregados++;
 				}
-				
-				if(ejerciciosAgregados == ejerciciosPorEntrenamiento)
+
+				if (ejerciciosAgregados == ejerciciosPorEntrenamiento)
 					break;
 			}
-			
+
 			entrenamientoDto.setEjercicios(ejercicios);
 			entrenamientos.add(EntrenamientoController.nuevoEntrenamiento(entrenamientoDto));
 
 		}
-		
+
 		rutinaDto.setEntrenamientos(entrenamientos);
-			
+
 		return RutinaController.nuevaRutina(rutinaDto);
 
 	}
-	
+
 	public static int numeroAleatorioEnRango(int minimo, int maximo) {
-        return ThreadLocalRandom.current().nextInt(minimo, maximo + 1);
-    }
+		return ThreadLocalRandom.current().nextInt(minimo, maximo + 1);
+	}
 }
