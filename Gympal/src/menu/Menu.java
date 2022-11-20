@@ -147,9 +147,9 @@ public class Menu {
 				System.out.println("Completados:" + entrenamientoDto.getEjerciciosCompletados());
 				System.out.println("Fecha de entrenamiento:" + entrenamientoDto.getFechaAsignada().get(Calendar.DATE)
 						+ "/" + entrenamientoDto.getFechaAsignada().get(Calendar.MONTH) + "/"
-						+ entrenamientoDto.getFechaAsignada().get(Calendar.YEAR) + "/");
+						+ entrenamientoDto.getFechaAsignada().get(Calendar.YEAR));
 				System.out.println("Fecha de ejecucion:" + entrenamientoDto.getFechaEjecucion().get(Calendar.DATE) + "/"
-						+ entrenamientoDto.getFechaEjecucion().get(Calendar.MONTH)
+						+ entrenamientoDto.getFechaEjecucion().get(Calendar.MONTH) + "/"
 						+ entrenamientoDto.getFechaEjecucion().get(Calendar.YEAR));
 				System.out.println("***************************************************************");
 				System.out.println("\n*************************EJERCICIOS:***************************");

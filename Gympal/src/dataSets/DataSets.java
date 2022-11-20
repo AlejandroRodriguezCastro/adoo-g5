@@ -82,7 +82,7 @@ public class DataSets {
 			
 		
 		// BRAZOS
-		Ejercicio ejercicio41 = new Ejercicio("Curl para bíceps con barra olímpica",4,10,20f,1,ExigenciaMuscular.MEDIA,GrupoMuscular.BRAZOS,"");
+		Ejercicio ejercicio41 = new Ejercicio("Curl para bíceps con barra olímpica",4,10,20f,1,ExigenciaMuscular.ALTA,GrupoMuscular.BRAZOS,"");
 		Ejercicio ejercicio42 = new Ejercicio("Curl con barra Z",3,12,15f,2,ExigenciaMuscular.MEDIA,GrupoMuscular.BRAZOS,"");
 		Ejercicio ejercicio43 = new Ejercicio("Curl con mancuernas",3,10,7.5f,3,ExigenciaMuscular.BAJA,GrupoMuscular.BRAZOS,"");
 		Ejercicio ejercicio44 = new Ejercicio("Curl de martillo con mancuernas",3,8,5f,4,ExigenciaMuscular.BAJA,GrupoMuscular.BRAZOS,"");

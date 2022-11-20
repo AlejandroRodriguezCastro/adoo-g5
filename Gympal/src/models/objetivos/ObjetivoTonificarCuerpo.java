@@ -2,6 +2,7 @@ package models.objetivos;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -28,7 +29,7 @@ public class ObjetivoTonificarCuerpo extends Objetivo {
 		EntrenamientoDto entrenamientoDto = new EntrenamientoDto();
 		Calendar c1 = Calendar.getInstance();
 		List<Entrenamiento> entrenamientos = new ArrayList<>();
-		int ejerciciosPorEntrenamiento = 4;
+		// int ejerciciosPorEntrenamiento = 4;
 		rutinaDto.setDiasCompletados(0);
 		rutinaDto.setDuracion(28);
 
@@ -36,11 +37,20 @@ public class ObjetivoTonificarCuerpo extends Objetivo {
 
 			List<Ejercicio> ejercicios = new ArrayList<>();
 
-			if (dia == 1)
-				entrenamientoDto.setFechaAsignada(c1);
+			if (dia == 1) {
+				Date dt = new Date();
+				Calendar c = Calendar.getInstance();
+				c.setTime(dt);
+				entrenamientoDto.setFechaAsignada(c);
+			}
+
 			else {
-				c1.add(Calendar.DAY_OF_YEAR, dia);
-				entrenamientoDto.setFechaAsignada(c1);
+
+				Date dt = new Date();
+				Calendar c = Calendar.getInstance();
+				c.setTime(dt);
+				c.add(Calendar.DAY_OF_YEAR, dia - 1);
+				entrenamientoDto.setFechaAsignada(c);
 			}
 			entrenamientoDto.setDia(dia);
 			entrenamientoDto.setEjerciciosCompletados(0);
@@ -87,6 +97,10 @@ public class ObjetivoTonificarCuerpo extends Objetivo {
 			List<Integer> ejerciciosDisponibles = new ArrayList<>();
 			int ejerciciosAgregados = 0;
 
+			if (ejerciciosAuxiliares.size() < 4) {
+				entrenamientoDto.setCantidadEjercicios(ejerciciosAuxiliares.size());
+			}
+
 			for (int i = 0; i <= 999; i++) {
 				int indiceAleatorio;
 				boolean repetido = false;
@@ -104,7 +118,7 @@ public class ObjetivoTonificarCuerpo extends Objetivo {
 					ejerciciosAgregados++;
 				}
 
-				if (ejerciciosAgregados == ejerciciosPorEntrenamiento)
+				if (ejerciciosAgregados == entrenamientoDto.getCantidadEjercicios())
 					break;
 			}
 

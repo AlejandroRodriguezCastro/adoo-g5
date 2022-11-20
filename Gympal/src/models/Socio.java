@@ -114,6 +114,8 @@ public class Socio {
 			}
 		} else {
 
+			System.out.println(this.objetivo.getRutina().toString());
+
 			for (Entrenamiento e : this.objetivo.getRutina().getEntrenamientos()) {
 
 				if (e.getDia() == this.objetivo.getRutina().getDiasCompletados() + 1) {
