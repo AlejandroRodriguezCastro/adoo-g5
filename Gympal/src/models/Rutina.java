@@ -86,7 +86,7 @@ public class Rutina {
 
 	@Override
 	public String toString() {
-		return "Rutina [duracion=" + duracion + ", diasCompletados="
+		return "\nRutina [duracion=" + duracion + ", diasCompletados="
 				+ diasCompletados + "]";
 	}
 	

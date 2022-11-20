@@ -8,6 +8,7 @@ import models.Interfaces.adapters.IAdapterAutenticator;
 import models.Medicion;
 import models.Socio;
 import models.objetivos.Objetivo;
+import valueObject.EntrenamientoDto;
 import valueObject.MedicionDto;
 import valueObject.SocioDto;
 
@@ -59,9 +60,11 @@ public class SocioController {
 		socio.setearObjetvo(objetivo);
 	}
 	
-	public static void comenzarEntrenamiento() {
-		socio.comenzarEntrenamiento();
+	public static EntrenamientoDto comenzarEntrenamiento() {
+		EntrenamientoDto entrenamientoDto = new EntrenamientoDto();
+		entrenamientoDto = socio.comenzarEntrenamiento();
 		dataSets.guardarSocio(socio);
+		return entrenamientoDto;
 	}
 
 	public static String nuevoSocio(SocioDto socioDto) {

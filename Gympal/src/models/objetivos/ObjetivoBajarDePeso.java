@@ -44,6 +44,8 @@ public class ObjetivoBajarDePeso extends Objetivo {
 				entrenamientoDto.setFechaAsignada(c1);
 			}
 			entrenamientoDto.setDia(dia);
+			entrenamientoDto.setEjerciciosCompletados(0);
+			entrenamientoDto.setCantidadEjercicios(4);
 
 			List<Ejercicio> ejerciciosAuxiliares = new ArrayList<>();
 

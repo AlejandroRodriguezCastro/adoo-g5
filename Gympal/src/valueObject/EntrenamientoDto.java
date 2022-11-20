@@ -14,6 +14,8 @@ public class EntrenamientoDto {
 	
 	private List<Ejercicio> Ejercicios;
     private int dia;
+    private int cantidadEjercicios;
+    private int ejerciciosCompletados;
     private Calendar fechaAsignada;
     private Calendar fechaEjecucion;
     
@@ -48,6 +50,22 @@ public class EntrenamientoDto {
 
 	public void setFechaEjecucion(Calendar fechaEjecucion) {
 		this.fechaEjecucion = fechaEjecucion;
+	}
+
+	public int getCantidadEjercicios() {
+		return cantidadEjercicios;
+	}
+
+	public void setCantidadEjercicios(int cantidadEjercicios) {
+		this.cantidadEjercicios = cantidadEjercicios;
+	}
+
+	public int getEjerciciosCompletados() {
+		return ejerciciosCompletados;
+	}
+
+	public void setEjerciciosCompletados(int ejerciciosCompletados) {
+		this.ejerciciosCompletados = ejerciciosCompletados;
 	}
 
 }

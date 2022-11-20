@@ -68,10 +68,12 @@ public class Ejercicio {
 
 	@Override
 	public String toString() {
-		return "\nEjercicio [series=" + series + ", repeticiones=" + repeticiones + ", descripcion=" + descripcion
-				+ ", pesoAsignado=" + pesoAsignado + ", nivelAerobico=" + nivelAerobico + ", exigenciaMuscular="
-				+ exigenciaMuscular + ", grupoMuscular=" + grupoMuscular + ", videoUrl=" + videoUrl + "]";
+		return "\nEjercicio [descripcion=" + descripcion + ", \ngrupoMuscular=" + grupoMuscular + ", \nexigenciaMuscular="
+				+ exigenciaMuscular + ", \nnivelAerobico=" + nivelAerobico + ", \npesoAsignado=" + pesoAsignado
+				+ ", series=" + series + ", repeticiones=" + repeticiones + ", videoUrl=" + videoUrl + "]";
 	}
+
+
 	
 	
 }

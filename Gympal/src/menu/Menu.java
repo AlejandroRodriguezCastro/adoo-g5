@@ -3,11 +3,13 @@ package menu;
 import java.util.Calendar;
 import java.util.Scanner;
 import controllers.SocioController;
+import models.Ejercicio;
 import models.enums.Sexo;
 import models.objetivos.Objetivo;
 import models.objetivos.ObjetivoBajarDePeso;
 import models.objetivos.ObjetivoMantenerFigura;
 import models.objetivos.ObjetivoTonificarCuerpo;
+import valueObject.EntrenamientoDto;
 import valueObject.MedicionDto;
 import valueObject.SocioDto;
 
@@ -136,8 +138,26 @@ public class Menu {
 				// SocioController.listar();
 				break;
 			case 4:
-				SocioController.comenzarEntrenamiento();
-				SocioController.listar();
+				EntrenamientoDto entrenamientoDto = new EntrenamientoDto();
+				entrenamientoDto = SocioController.comenzarEntrenamiento();
+
+				System.out.println("***************************************************************");
+				System.out.println("Dia de entrenamiento:" + entrenamientoDto.getDia());
+				System.out.println("Cantidad de ejercicios:" + entrenamientoDto.getCantidadEjercicios());
+				System.out.println("Completados:" + entrenamientoDto.getEjerciciosCompletados());
+				System.out.println("Fecha de entrenamiento:" + entrenamientoDto.getFechaAsignada().get(Calendar.DATE)
+						+ "/" + entrenamientoDto.getFechaAsignada().get(Calendar.MONTH) + "/"
+						+ entrenamientoDto.getFechaAsignada().get(Calendar.YEAR) + "/");
+				System.out.println("Fecha de ejecucion:" + entrenamientoDto.getFechaEjecucion().get(Calendar.DATE) + "/"
+						+ entrenamientoDto.getFechaEjecucion().get(Calendar.MONTH)
+						+ entrenamientoDto.getFechaEjecucion().get(Calendar.YEAR));
+				System.out.println("***************************************************************");
+				System.out.println("\n*************************EJERCICIOS:***************************");
+				for (Ejercicio e : entrenamientoDto.getEjercicios()) {
+					System.out.println(e.toString());
+				}
+				System.out.println("\n***************************************************************");
+				// SocioController.listar();
 				break;
 			}
 

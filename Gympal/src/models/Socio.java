@@ -6,6 +6,7 @@ import controllers.RutinaController;
 import models.Interfaces.adapters.IAdapterAutenticator;
 import models.enums.Sexo;
 import models.objetivos.Objetivo;
+import valueObject.EntrenamientoDto;
 import valueObject.MedicionDto;
 import valueObject.SocioDto;
 import java.util.ArrayList;
@@ -92,16 +93,42 @@ public class Socio {
 		 */
 	}
 
-	public void comenzarEntrenamiento() {
+	public EntrenamientoDto comenzarEntrenamiento() {
+		EntrenamientoDto entrenamientoDto = new EntrenamientoDto();
 		if (this.objetivo.getRutina() == null) {
 			this.objetivo.setRutina(RutinaController.crearRutina(this.objetivo));
-			
+
 			System.out.println(this.objetivo.getRutina().toString());
-			
-			for(Entrenamiento e: this.objetivo.getRutina().getEntrenamientos()) {
-				System.out.println(e.toString());
+
+			for (Entrenamiento e : this.objetivo.getRutina().getEntrenamientos()) {
+
+				if (e.getDia() == this.objetivo.getRutina().getDiasCompletados() + 1) {
+					entrenamientoDto.setCantidadEjercicios(e.getCantidadEjercicios());
+					entrenamientoDto.setEjerciciosCompletados(e.getEjerciciosCompletados());
+					entrenamientoDto.setDia(e.getDia());
+					entrenamientoDto.setEjercicios(e.getEjercicios());
+					entrenamientoDto.setFechaAsignada(e.getFechaAsignada());
+					entrenamientoDto.setFechaEjecucion(e.getFechaEjecucion());
+				}
+				return entrenamientoDto;
 			}
+		} else {
+
+			for (Entrenamiento e : this.objetivo.getRutina().getEntrenamientos()) {
+
+				if (e.getDia() == this.objetivo.getRutina().getDiasCompletados() + 1) {
+					entrenamientoDto.setCantidadEjercicios(e.getCantidadEjercicios());
+					entrenamientoDto.setEjerciciosCompletados(e.getEjerciciosCompletados());
+					entrenamientoDto.setDia(e.getDia());
+					entrenamientoDto.setEjercicios(e.getEjercicios());
+					entrenamientoDto.setFechaAsignada(e.getFechaAsignada());
+					entrenamientoDto.setFechaEjecucion(e.getFechaEjecucion());
+				}
+				return entrenamientoDto;
+			}
+
 		}
+		return null;
 	}
 
 	public String getNombre() {

@@ -15,6 +15,8 @@ public class EntrenamientoController {
 		entrenamiento.setFechaAsignada(entrenamientoDto.getFechaAsignada());
 		entrenamiento.setEjercicios(entrenamientoDto.getEjercicios());
 		entrenamiento.setFechaEjecucion(entrenamientoDto.getFechaEjecucion());
+		entrenamiento.setCantidadEjercicios(entrenamientoDto.getCantidadEjercicios());
+		entrenamiento.setEjerciciosCompletados(entrenamientoDto.getEjerciciosCompletados());
 		return entrenamiento;
 	}
 
