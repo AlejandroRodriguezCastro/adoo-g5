@@ -1,8 +1,12 @@
 package controllers;
 
+import java.util.List;
+
 import models.Ejercicio;
 import models.Entrenamiento;
+import valueObject.EjercicioDto;
 import valueObject.EntrenamientoDto;
+import valueObject.SocioDto;
 
 public class EntrenamientoController {
 	
@@ -25,6 +29,14 @@ public class EntrenamientoController {
 	
 	public static void terminarEntrenamiento(Entrenamiento entrenamiento) {
 		entrenamiento.terminarEntrenamiento();
+	}
+
+	public static void reforzarEjercicio(Ejercicio ejercicio, EjercicioDto ejercicioDto) {
+		ejercicio.reforzarEjercicio(ejercicioDto);
+	}
+	
+	public static List<EntrenamientoDto> registroEntrenamiento(SocioDto socioDto) {
+		return entrenamiento.registroEntrenamiento(socioDto);
 	}
 
 }

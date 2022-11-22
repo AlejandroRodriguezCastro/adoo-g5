@@ -7,6 +7,7 @@ import controllers.RutinaController;
 import models.Interfaces.adapters.IAdapterAutenticator;
 import models.enums.Sexo;
 import models.objetivos.Objetivo;
+import valueObject.EjercicioDto;
 import valueObject.EntrenamientoDto;
 import valueObject.MedicionDto;
 import valueObject.SocioDto;
@@ -102,6 +103,7 @@ public class Socio {
 				if (EntrenamientoController.terminarEjercicio(e, ejercicio) == 0) {
 					this.objetivo.getRutina().diaCompletado();
 					EntrenamientoController.terminarEntrenamiento(e);
+					break;
 				}
 
 			}
@@ -209,6 +211,18 @@ public class Socio {
 	public SocioDto getSocioDto() {
 		SocioDto socio = new SocioDto(nombre, apellido, nroSocio, documento, edad, sexo, altura);
 		return socio;
+	}
+
+	public void reforzarEjercicio(EjercicioDto ejercicioDto) {
+		for (Entrenamiento e : this.objetivo.getRutina().getEntrenamientos()) {
+
+			if (e.getDia() == this.objetivo.getRutina().getDiasCompletados() + 1) {
+				EntrenamientoController.reforzarEjercicio(e.getEjercicios().get(ejercicioDto.getNroEjercicio()),
+						ejercicioDto);
+				break;
+			}
+
+		}
 	}
 
 }

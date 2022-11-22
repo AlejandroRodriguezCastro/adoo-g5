@@ -5,10 +5,15 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+
+import valueObject.EjercicioDto;
+import valueObject.EntrenamientoDto;
+import valueObject.SocioDto;
 
 public class Entrenamiento {
 
-	//private List<Ejercicio> Ejercicios;
+	// private List<Ejercicio> Ejercicios;
 	private Map<Integer, Ejercicio> Ejercicios = new HashMap<Integer, Ejercicio>();
 	private int dia;
 	private int cantidadEjercicios;
@@ -26,9 +31,9 @@ public class Entrenamiento {
 		// TODO Auto-generated constructor stub
 	}
 
-	/*public List<Ejercicio> getEjercicios() {
-		return Ejercicios;
-	}*/
+	/*
+	 * public List<Ejercicio> getEjercicios() { return Ejercicios; }
+	 */
 
 	public int getDia() {
 		return dia;
@@ -54,9 +59,10 @@ public class Entrenamiento {
 		this.fechaEjecucion = fechaEjecucion;
 	}
 
-	/*public void setEjercicios(List<Ejercicio> ejercicios) {
-		Ejercicios = ejercicios;
-	}*/
+	/*
+	 * public void setEjercicios(List<Ejercicio> ejercicios) { Ejercicios =
+	 * ejercicios; }
+	 */
 
 	@Override
 	public String toString() {
@@ -98,16 +104,56 @@ public class Entrenamiento {
 	public void setEjerciciosFinalizados(List<Integer> ejerciciosFinalizados) {
 		this.ejerciciosFinalizados = ejerciciosFinalizados;
 	}
-	
+
 	public int terminarEjercicio(int ejercicio) {
 		this.ejerciciosFinalizados.add(ejercicio);
 		this.ejerciciosCompletados += 1;
 		return this.cantidadEjercicios - this.ejerciciosCompletados;
 	}
-	
+
 	public void terminarEntrenamiento() {
 		Calendar c1 = Calendar.getInstance();
 		this.fechaEjecucion = c1;
+	}
+
+	public List<EntrenamientoDto> registroEntrenamiento(SocioDto socioDto) {
+		List<EntrenamientoDto> entrenamientos = new ArrayList<>();
+		boolean tieneEjerciciosFinalizados = false;
+
+		System.out.println(socioDto.getObjetivo().getRutina().toString());
+
+		for (Entrenamiento e : socioDto.getObjetivo().getRutina().getEntrenamientos()) {
+
+			boolean guardar = false;
+			EntrenamientoDto entrenamientoDto = new EntrenamientoDto();
+			Map<Integer, Ejercicio> Ejercicios = new HashMap<Integer, Ejercicio>();
+			entrenamientoDto.setDia(e.getDia());
+			entrenamientoDto.setCantidadEjercicios(e.getCantidadEjercicios());
+			entrenamientoDto.setEjerciciosCompletados(e.getEjerciciosCompletados());
+			entrenamientoDto.setFechaAsignada(e.getFechaAsignada());
+			entrenamientoDto.setFechaEjecucion(e.getFechaEjecucion());
+
+			for (Entry<Integer, Ejercicio> entry : e.getEjercicios().entrySet()) {
+				for (Integer i : e.getEjerciciosFinalizados()) {
+
+					if (i == entry.getKey()) {
+						Ejercicios.put(i, entry.getValue());
+						tieneEjerciciosFinalizados = true;
+						guardar = true;
+					}
+
+				}
+			}
+
+			entrenamientoDto.setEjercicios(Ejercicios);
+			if (guardar)
+				entrenamientos.add(entrenamientoDto);
+
+		}
+		if (tieneEjerciciosFinalizados)
+			return entrenamientos;
+		else
+			return null;
 	}
 
 }

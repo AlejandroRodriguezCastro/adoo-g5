@@ -17,6 +17,7 @@ public class SocioDto {
 	private Float altura;
 	private String passwd;
 	private Boolean tieneObjetivo;
+	private Objetivo objetivo;
 
 	public SocioDto(String nombre2, String apellido2, String nroSocio2, String documento2, Integer edad2, Sexo sexo2,
 			Float altura2) {
@@ -102,5 +103,13 @@ public class SocioDto {
 
 	public void setAltura(Float altura) {
 		this.altura = altura;
+	}
+
+	public Objetivo getObjetivo() {
+		return objetivo;
+	}
+
+	public void setObjetivo(Objetivo objetivo) {
+		this.objetivo = objetivo;
 	}
 }

@@ -8,6 +8,7 @@ import models.Interfaces.adapters.IAdapterAutenticator;
 import models.Medicion;
 import models.Socio;
 import models.objetivos.Objetivo;
+import valueObject.EjercicioDto;
 import valueObject.EntrenamientoDto;
 import valueObject.MedicionDto;
 import valueObject.SocioDto;
@@ -24,13 +25,14 @@ public class SocioController {
 			socioDto.setNombre(socio.getNombre());
 			socioDto.setApellido(socio.getApellido());
 			socioDto.setTieneObjetivo(socio.getObjetivo() != null);
+			socioDto.setObjetivo(socio.getObjetivo());
 			return true;
 		}
 		return false;
 	}
-	
+
 	public static boolean exists(SocioDto socioDto) {
-		if (dataSets.getSocioByDocumento(socioDto.getDocumento()) != null){
+		if (dataSets.getSocioByDocumento(socioDto.getDocumento()) != null) {
 			return true;
 		}
 		return false;
@@ -47,7 +49,7 @@ public class SocioController {
 		socio.setMediciones(mediciones);
 		dataSets.guardarSocio(socio);
 	}
-	
+
 	public static void registrarPesaje(MedicionDto medicionDto) {
 		List<Medicion> mediciones = new ArrayList<>();
 		mediciones = socio.getMediciones();
@@ -59,7 +61,7 @@ public class SocioController {
 	public static void setearObjetivo(Objetivo objetivo) {
 		socio.setearObjetvo(objetivo);
 	}
-	
+
 	public static EntrenamientoDto comenzarEntrenamiento() {
 		EntrenamientoDto entrenamientoDto = new EntrenamientoDto();
 		entrenamientoDto = socio.comenzarEntrenamiento();
@@ -70,18 +72,29 @@ public class SocioController {
 	public static String nuevoSocio(SocioDto socioDto) {
 		socio = new Socio(socioDto);
 		dataSets.guardarSocio(socio);
-		autenticador.register(socio.getNroSocio(),socioDto.getPasswd());
+		autenticador.register(socio.getNroSocio(), socioDto.getPasswd());
 		return socio.getNroSocio();
-	}
-
-	public static void reforzarEjercicio() {
-		// TODO Auto-generated method stub
-		
 	}
 
 	public static void terminarEjercicio(int ejercicio) {
 		socio.terminarEjercicio(ejercicio);
 		dataSets.guardarSocio(socio);
+	}
+
+	public static void reforzarEjercicio(EjercicioDto ejercicioDto) {
+		socio.reforzarEjercicio(ejercicioDto);
+		dataSets.guardarSocio(socio);
+
+	}
+
+	public static List<EntrenamientoDto> registroEntrenamiento() {
+		SocioDto socioDto = new SocioDto();
+		socioDto.setObjetivo(socio.getObjetivo());
+
+		if (socioDto.getObjetivo().getRutina() != null)
+			return EntrenamientoController.registroEntrenamiento(socioDto);
+		else
+			return null;
 	}
 
 }

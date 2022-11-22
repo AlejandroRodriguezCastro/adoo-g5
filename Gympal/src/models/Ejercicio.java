@@ -2,6 +2,7 @@ package models;
 
 import models.enums.ExigenciaMuscular;
 import models.enums.GrupoMuscular;
+import valueObject.EjercicioDto;
 
 public class Ejercicio {
 
@@ -71,6 +72,12 @@ public class Ejercicio {
 		return "\nEjercicio [descripcion=" + descripcion + ", \ngrupoMuscular=" + grupoMuscular + ", \nexigenciaMuscular="
 				+ exigenciaMuscular + ", \nnivelAerobico=" + nivelAerobico + ", \npesoAsignado=" + pesoAsignado
 				+ ", series=" + series + ", repeticiones=" + repeticiones + ", videoUrl=" + videoUrl + "]";
+	}
+
+	public void reforzarEjercicio(EjercicioDto ejercicioDto) {
+		this.series = ejercicioDto.getSeries();
+		this.repeticiones = ejercicioDto.getRepeticiones();
+		this.pesoAsignado = ejercicioDto.getPesoAsignado();		
 	}
 
 
