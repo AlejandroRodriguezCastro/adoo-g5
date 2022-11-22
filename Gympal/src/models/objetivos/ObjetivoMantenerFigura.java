@@ -3,7 +3,9 @@ package models.objetivos;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
 import controllers.EntrenamientoController;
@@ -35,7 +37,7 @@ public class ObjetivoMantenerFigura extends Objetivo {
 
 		for (int dia = 1; dia <= rutinaDto.getDuracion(); dia++) {
 
-			List<Ejercicio> ejercicios = new ArrayList<>();
+			Map<Integer, Ejercicio> ejercicios = new HashMap<Integer, Ejercicio>();
 
 			if (dia == 1) {
 				Date dt = new Date();
@@ -113,7 +115,7 @@ public class ObjetivoMantenerFigura extends Objetivo {
 
 				if (!repetido) {
 					ejerciciosDisponibles.add(indiceAleatorio);
-					ejercicios.add(ejerciciosAuxiliares.get(indiceAleatorio));
+					ejercicios.put(ejerciciosAgregados + 1, ejerciciosAuxiliares.get(indiceAleatorio));
 					ejerciciosAgregados++;
 				}
 

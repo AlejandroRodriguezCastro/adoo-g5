@@ -1,6 +1,7 @@
 package models;
 
 import adapter.LoginAdapter;
+import controllers.EntrenamientoController;
 import controllers.MedicionController;
 import controllers.RutinaController;
 import models.Interfaces.adapters.IAdapterAutenticator;
@@ -93,11 +94,25 @@ public class Socio {
 		 */
 	}
 
+	public void terminarEjercicio(int ejercicio) {
+
+		for (Entrenamiento e : this.objetivo.getRutina().getEntrenamientos()) {
+
+			if (e.getDia() == this.objetivo.getRutina().getDiasCompletados() + 1) {
+				if (EntrenamientoController.terminarEjercicio(e, ejercicio) == 0) {
+					this.objetivo.getRutina().diaCompletado();
+					EntrenamientoController.terminarEntrenamiento(e);
+				}
+
+			}
+		}
+
+	}
+
 	public EntrenamientoDto comenzarEntrenamiento() {
 		EntrenamientoDto entrenamientoDto = new EntrenamientoDto();
 		if (this.objetivo.getRutina() == null) {
 			this.objetivo.setRutina(RutinaController.crearRutina(this.objetivo));
-
 			System.out.println(this.objetivo.getRutina().toString());
 
 			for (Entrenamiento e : this.objetivo.getRutina().getEntrenamientos()) {
@@ -109,6 +124,7 @@ public class Socio {
 					entrenamientoDto.setEjercicios(e.getEjercicios());
 					entrenamientoDto.setFechaAsignada(e.getFechaAsignada());
 					entrenamientoDto.setFechaEjecucion(e.getFechaEjecucion());
+					entrenamientoDto.setEjerciciosFinalizados(e.getEjerciciosFinalizados());
 				}
 				return entrenamientoDto;
 			}
@@ -125,9 +141,11 @@ public class Socio {
 					entrenamientoDto.setEjercicios(e.getEjercicios());
 					entrenamientoDto.setFechaAsignada(e.getFechaAsignada());
 					entrenamientoDto.setFechaEjecucion(e.getFechaEjecucion());
+					entrenamientoDto.setEjerciciosFinalizados(e.getEjerciciosFinalizados());
 				}
-				return entrenamientoDto;
+
 			}
+			return entrenamientoDto;
 
 		}
 		return null;

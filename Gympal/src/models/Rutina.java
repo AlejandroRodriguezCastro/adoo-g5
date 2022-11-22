@@ -90,6 +90,10 @@ public class Rutina {
 				+ diasCompletados + "]";
 	}
 	
+	public void diaCompletado() {
+		this.diasCompletados += 1;
+	}
+	
 	
 
 }

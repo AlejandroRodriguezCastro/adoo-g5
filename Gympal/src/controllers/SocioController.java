@@ -74,4 +74,14 @@ public class SocioController {
 		return socio.getNroSocio();
 	}
 
+	public static void reforzarEjercicio() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public static void terminarEjercicio(int ejercicio) {
+		socio.terminarEjercicio(ejercicio);
+		dataSets.guardarSocio(socio);
+	}
+
 }

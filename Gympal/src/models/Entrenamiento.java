@@ -1,20 +1,24 @@
 package models;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
-
-import models.enums.Dias;
+import java.util.Map;
 
 public class Entrenamiento {
 
-	private List<Ejercicio> Ejercicios;
+	//private List<Ejercicio> Ejercicios;
+	private Map<Integer, Ejercicio> Ejercicios = new HashMap<Integer, Ejercicio>();
 	private int dia;
 	private int cantidadEjercicios;
 	private int ejerciciosCompletados;
+	private List<Integer> ejerciciosFinalizados = new ArrayList<>();
 	private Calendar fechaAsignada;
 	private Calendar fechaEjecucion;
 
-	public Entrenamiento(List<Ejercicio> ejercicios) {
+	public Entrenamiento(Map<Integer, Ejercicio> ejercicios) {
+		super();
 		Ejercicios = ejercicios;
 	}
 
@@ -22,9 +26,9 @@ public class Entrenamiento {
 		// TODO Auto-generated constructor stub
 	}
 
-	public List<Ejercicio> getEjercicios() {
+	/*public List<Ejercicio> getEjercicios() {
 		return Ejercicios;
-	}
+	}*/
 
 	public int getDia() {
 		return dia;
@@ -50,9 +54,9 @@ public class Entrenamiento {
 		this.fechaEjecucion = fechaEjecucion;
 	}
 
-	public void setEjercicios(List<Ejercicio> ejercicios) {
+	/*public void setEjercicios(List<Ejercicio> ejercicios) {
 		Ejercicios = ejercicios;
-	}
+	}*/
 
 	@Override
 	public String toString() {
@@ -77,6 +81,33 @@ public class Entrenamiento {
 
 	public void setCantidadEjercicios(int cantidadEjercicios) {
 		this.cantidadEjercicios = cantidadEjercicios;
+	}
+
+	public Map<Integer, Ejercicio> getEjercicios() {
+		return Ejercicios;
+	}
+
+	public void setEjercicios(Map<Integer, Ejercicio> ejercicios) {
+		Ejercicios = ejercicios;
+	}
+
+	public List<Integer> getEjerciciosFinalizados() {
+		return ejerciciosFinalizados;
+	}
+
+	public void setEjerciciosFinalizados(List<Integer> ejerciciosFinalizados) {
+		this.ejerciciosFinalizados = ejerciciosFinalizados;
+	}
+	
+	public int terminarEjercicio(int ejercicio) {
+		this.ejerciciosFinalizados.add(ejercicio);
+		this.ejerciciosCompletados += 1;
+		return this.cantidadEjercicios - this.ejerciciosCompletados;
+	}
+	
+	public void terminarEntrenamiento() {
+		Calendar c1 = Calendar.getInstance();
+		this.fechaEjecucion = c1;
 	}
 
 }

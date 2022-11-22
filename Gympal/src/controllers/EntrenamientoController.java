@@ -1,9 +1,8 @@
 package controllers;
 
+import models.Ejercicio;
 import models.Entrenamiento;
-import models.Rutina;
 import valueObject.EntrenamientoDto;
-import valueObject.RutinaDto;
 
 public class EntrenamientoController {
 	
@@ -18,6 +17,14 @@ public class EntrenamientoController {
 		entrenamiento.setCantidadEjercicios(entrenamientoDto.getCantidadEjercicios());
 		entrenamiento.setEjerciciosCompletados(entrenamientoDto.getEjerciciosCompletados());
 		return entrenamiento;
+	}
+	
+	public static int terminarEjercicio(Entrenamiento entrenamiento, int ejercicio) {
+		return entrenamiento.terminarEjercicio(ejercicio);
+	}
+	
+	public static void terminarEntrenamiento(Entrenamiento entrenamiento) {
+		entrenamiento.terminarEntrenamiento();
 	}
 
 }
