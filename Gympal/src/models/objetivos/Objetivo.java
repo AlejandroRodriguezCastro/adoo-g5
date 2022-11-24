@@ -28,6 +28,14 @@ public abstract class Objetivo implements IObserver {
 
 	public abstract Rutina CrearRutina();
 
+	public void setSocio(Socio socio) {
+		this.socio = socio;
+	}
+
+	public void setPesoInicial(Float pesoInicial) {
+		this.pesoInicial = pesoInicial;
+	}
+
 	@Override
 	public String toString() {
 		return "Objetivo [rutina=" + rutina + "]";

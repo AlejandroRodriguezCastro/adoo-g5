@@ -179,7 +179,7 @@ public class Menu {
 						}
 						System.out.println("\n***************************************************************");
 					}
-				}else
+				} else
 					System.out.println("\n**No tienes entrenamientos comenzados**");
 
 				break;
@@ -194,36 +194,43 @@ public class Menu {
 		EntrenamientoDto entrenamientoDto = new EntrenamientoDto();
 		entrenamientoDto = SocioController.comenzarEntrenamiento();
 
-		System.out.println("***************************************************************");
-		System.out.println("Dia de entrenamiento:" + entrenamientoDto.getDia());
-		System.out.println("Cantidad de ejercicios:" + entrenamientoDto.getCantidadEjercicios());
-		System.out.println("Completados:" + entrenamientoDto.getEjerciciosCompletados());
-		System.out.println("Fecha de entrenamiento:" + entrenamientoDto.getFechaAsignada().get(Calendar.DATE) + "/"
-				+ entrenamientoDto.getFechaAsignada().get(Calendar.MONTH) + "/"
-				+ entrenamientoDto.getFechaAsignada().get(Calendar.YEAR));
-		System.out.println("Fecha de ejecucion:" + entrenamientoDto.getFechaEjecucion().get(Calendar.DATE) + "/"
-				+ entrenamientoDto.getFechaEjecucion().get(Calendar.MONTH) + "/"
-				+ entrenamientoDto.getFechaEjecucion().get(Calendar.YEAR));
-		System.out.println("***************************************************************");
-		System.out.println("\n*************************EJERCICIOS:***************************");
-		for (Entry<Integer, Ejercicio> entry : entrenamientoDto.getEjercicios().entrySet()) {
+		if (entrenamientoDto != null) {
 
-			boolean mostrar = true;
+			System.out.println("***************************************************************");
+			System.out.println("Dia de entrenamiento:" + entrenamientoDto.getDia());
+			System.out.println("Cantidad de ejercicios:" + entrenamientoDto.getCantidadEjercicios());
+			System.out.println("Completados:" + entrenamientoDto.getEjerciciosCompletados());
+			System.out.println("Fecha de entrenamiento:" + entrenamientoDto.getFechaAsignada().get(Calendar.DATE) + "/"
+					+ entrenamientoDto.getFechaAsignada().get(Calendar.MONTH) + "/"
+					+ entrenamientoDto.getFechaAsignada().get(Calendar.YEAR));
+			System.out.println("Fecha de ejecucion:" + entrenamientoDto.getFechaEjecucion().get(Calendar.DATE) + "/"
+					+ entrenamientoDto.getFechaEjecucion().get(Calendar.MONTH) + "/"
+					+ entrenamientoDto.getFechaEjecucion().get(Calendar.YEAR));
+			System.out.println("***************************************************************");
+			System.out.println("\n*************************EJERCICIOS:***************************");
+			for (Entry<Integer, Ejercicio> entry : entrenamientoDto.getEjercicios().entrySet()) {
 
-			for (Integer i : entrenamientoDto.getEjerciciosFinalizados()) {
-				if (i == entry.getKey())
-					mostrar = false;
+				boolean mostrar = true;
+
+				for (Integer i : entrenamientoDto.getEjerciciosFinalizados()) {
+					if (i == entry.getKey())
+						mostrar = false;
+				}
+
+				if (mostrar) {
+					System.out.println("\nEjercicio: " + entry.getKey());
+					System.out.println(entry.getValue().toString());
+				}
+
 			}
+			System.out.println("\n***************************************************************");
+			// SocioController.listar();
 
-			if (mostrar) {
-				System.out.println("\nEjercicio: " + entry.getKey());
-				System.out.println(entry.getValue().toString());
-			}
+			subMenuEjercicio(socioDto);
 
-		}
-		System.out.println("\n***************************************************************");
-		// SocioController.listar();
-		subMenuEjercicio(socioDto);
+		} else
+			System.out.println("\n**Debes pesarte antes de comenzar un entrenamiento**");
+
 	}
 
 	public static void subMenuPesarme() {

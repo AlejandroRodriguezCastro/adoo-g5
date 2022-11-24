@@ -65,8 +65,11 @@ public class SocioController {
 	public static EntrenamientoDto comenzarEntrenamiento() {
 		EntrenamientoDto entrenamientoDto = new EntrenamientoDto();
 		entrenamientoDto = socio.comenzarEntrenamiento();
-		dataSets.guardarSocio(socio);
-		return entrenamientoDto;
+		if (entrenamientoDto != null) {
+			dataSets.guardarSocio(socio);
+			return entrenamientoDto;
+		} else
+			return null;
 	}
 
 	public static String nuevoSocio(SocioDto socioDto) {

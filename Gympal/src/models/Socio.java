@@ -111,25 +111,38 @@ public class Socio {
 
 	}
 
+	private float pesoInicial() {
+		if (this.mediciones.size() == 0) {
+			return -1;
+		} else
+			return mediciones.get(mediciones.size() - 1).getPeso();
+	}
+
 	public EntrenamientoDto comenzarEntrenamiento() {
 		EntrenamientoDto entrenamientoDto = new EntrenamientoDto();
 		if (this.objetivo.getRutina() == null) {
-			this.objetivo.setRutina(RutinaController.crearRutina(this.objetivo));
-			System.out.println(this.objetivo.getRutina().toString());
 
-			for (Entrenamiento e : this.objetivo.getRutina().getEntrenamientos()) {
+			if (pesoInicial() != -1) {
 
-				if (e.getDia() == this.objetivo.getRutina().getDiasCompletados() + 1) {
-					entrenamientoDto.setCantidadEjercicios(e.getCantidadEjercicios());
-					entrenamientoDto.setEjerciciosCompletados(e.getEjerciciosCompletados());
-					entrenamientoDto.setDia(e.getDia());
-					entrenamientoDto.setEjercicios(e.getEjercicios());
-					entrenamientoDto.setFechaAsignada(e.getFechaAsignada());
-					entrenamientoDto.setFechaEjecucion(e.getFechaEjecucion());
-					entrenamientoDto.setEjerciciosFinalizados(e.getEjerciciosFinalizados());
+				this.objetivo.setRutina(RutinaController.crearRutina(this.objetivo));
+				System.out.println(this.objetivo.getRutina().toString());
+				this.objetivo.setPesoInicial(pesoInicial());
+
+				for (Entrenamiento e : this.objetivo.getRutina().getEntrenamientos()) {
+
+					if (e.getDia() == this.objetivo.getRutina().getDiasCompletados() + 1) {
+						entrenamientoDto.setCantidadEjercicios(e.getCantidadEjercicios());
+						entrenamientoDto.setEjerciciosCompletados(e.getEjerciciosCompletados());
+						entrenamientoDto.setDia(e.getDia());
+						entrenamientoDto.setEjercicios(e.getEjercicios());
+						entrenamientoDto.setFechaAsignada(e.getFechaAsignada());
+						entrenamientoDto.setFechaEjecucion(e.getFechaEjecucion());
+						entrenamientoDto.setEjerciciosFinalizados(e.getEjerciciosFinalizados());
+					}
+					return entrenamientoDto;
 				}
-				return entrenamientoDto;
-			}
+			} else
+				return null;
 		} else {
 
 			System.out.println(this.objetivo.getRutina().toString());
