@@ -15,6 +15,7 @@ public class SocioDto {
 	private Integer edad;
 	private Sexo sexo;
 	private Float altura;
+	private Float peso;
 	private String passwd;
 	private Boolean tieneObjetivo;
 	private Objetivo objetivo;
@@ -111,5 +112,13 @@ public class SocioDto {
 
 	public void setObjetivo(Objetivo objetivo) {
 		this.objetivo = objetivo;
+	}
+
+	public Float getPeso() {
+		return peso;
+	}
+
+	public void setPeso(Float peso) {
+		this.peso = peso;
 	}
 }

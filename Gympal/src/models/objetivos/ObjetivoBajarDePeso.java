@@ -8,25 +8,46 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
+import adapter.AdapterPesoIdeal;
 import controllers.EntrenamientoController;
 import controllers.RutinaController;
 import models.Ejercicio;
 import models.Entrenamiento;
 import models.Rutina;
 import models.Interfaces.IObservable;
+import models.Interfaces.adapters.IAdapterAutenticator;
+import models.Interfaces.adapters.IAdapterPesoIdeal;
 import models.enums.GrupoMuscular;
 import valueObject.EntrenamientoDto;
 import valueObject.RutinaDto;
+import valueObject.SocioDto;
 
 public class ObjetivoBajarDePeso extends Objetivo {
+
+	private IAdapterPesoIdeal pesoIdeal = new AdapterPesoIdeal();
+	private float pesoIdealMin;
+	private float pesoIdealMax;
 
 	@Override
 	public void serNotificadoPor(IObservable observable) {
 		return;
 	}
 
+	public float calcularPesoIdealMin(float altura) {
+		return this.pesoIdeal.obtenerPesoIdealMin(altura);
+	}
+
+	public float calcularPesoIdealMax(float altura) {
+		return this.pesoIdeal.obtenerPesoIdealMax(altura);
+	}
+
 	@Override
-	public Rutina CrearRutina() {
+	public Rutina CrearRutina(SocioDto socioDto) {
+
+		if (this.getPesoInicial() >= calcularPesoIdealMin(socioDto.getAltura())
+				&& this.getPesoInicial() <= calcularPesoIdealMax(socioDto.getAltura())) {
+			return null;
+		}
 
 		RutinaDto rutinaDto = new RutinaDto();
 		EntrenamientoDto entrenamientoDto = new EntrenamientoDto();
@@ -34,6 +55,8 @@ public class ObjetivoBajarDePeso extends Objetivo {
 		// int ejerciciosPorEntrenamiento = 4;
 		rutinaDto.setDiasCompletados(0);
 		rutinaDto.setDuracion(28);
+		this.setPesoIdealMin(calcularPesoIdealMin(socioDto.getAltura()));
+		this.setPesoIdealMax(calcularPesoIdealMax(socioDto.getAltura()));
 
 		for (int dia = 1; dia <= rutinaDto.getDuracion(); dia++) {
 
@@ -137,5 +160,36 @@ public class ObjetivoBajarDePeso extends Objetivo {
 
 	public static int numeroAleatorioEnRango(int minimo, int maximo) {
 		return ThreadLocalRandom.current().nextInt(minimo, maximo + 1);
+	}
+
+	public float getPesoIdealMin() {
+		return pesoIdealMin;
+	}
+
+	public void setPesoIdealMin(float pesoIdealMin) {
+		this.pesoIdealMin = pesoIdealMin;
+	}
+
+	public float getPesoIdealMax() {
+		return pesoIdealMax;
+	}
+
+	public void setPesoIdealMax(float pesoIdealMax) {
+		this.pesoIdealMax = pesoIdealMax;
+	}
+
+	@Override
+	public boolean objetivoAlcanzado() {
+		if (this.getPesoInicial() >= this.pesoIdealMin && this.getPesoInicial() <= this.pesoIdealMax) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public void indicarObjetivo() {
+		System.out.println("\n*************META***********");
+		System.out.println("Peso entre: " + this.pesoIdealMin + "kg - " + this.pesoIdealMax + "kg");
+		System.out.println("****************************");
 	}
 }

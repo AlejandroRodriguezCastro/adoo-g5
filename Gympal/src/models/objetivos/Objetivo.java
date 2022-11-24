@@ -1,6 +1,7 @@
 package models.objetivos;
 
 import models.Interfaces.IObserver;
+import valueObject.SocioDto;
 import models.Rutina;
 import models.Socio;
 
@@ -26,7 +27,11 @@ public abstract class Objetivo implements IObserver {
         this.rutina = rutina;
     }
 
-	public abstract Rutina CrearRutina();
+	public abstract Rutina CrearRutina(SocioDto socioDto);
+	
+	public abstract boolean objetivoAlcanzado();
+	
+	public abstract void indicarObjetivo();
 
 	public void setSocio(Socio socio) {
 		this.socio = socio;

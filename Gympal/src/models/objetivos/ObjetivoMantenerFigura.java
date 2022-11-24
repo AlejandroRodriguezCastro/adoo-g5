@@ -17,6 +17,7 @@ import models.Interfaces.IObservable;
 import models.enums.GrupoMuscular;
 import valueObject.EntrenamientoDto;
 import valueObject.RutinaDto;
+import valueObject.SocioDto;
 
 public class ObjetivoMantenerFigura extends Objetivo {
 	@Override
@@ -25,7 +26,7 @@ public class ObjetivoMantenerFigura extends Objetivo {
 	}
 
 	@Override
-	public Rutina CrearRutina() {
+	public Rutina CrearRutina(SocioDto socioDto) {
 
 		RutinaDto rutinaDto = new RutinaDto();
 		EntrenamientoDto entrenamientoDto = new EntrenamientoDto();
@@ -136,5 +137,17 @@ public class ObjetivoMantenerFigura extends Objetivo {
 
 	public static int numeroAleatorioEnRango(int minimo, int maximo) {
 		return ThreadLocalRandom.current().nextInt(minimo, maximo + 1);
+	}
+
+	@Override
+	public boolean objetivoAlcanzado() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void indicarObjetivo() {
+		// TODO Auto-generated method stub
+		
 	}
 }

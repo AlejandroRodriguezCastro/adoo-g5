@@ -229,7 +229,8 @@ public class Menu {
 			subMenuEjercicio(socioDto);
 
 		} else
-			System.out.println("\n**Debes pesarte antes de comenzar un entrenamiento**");
+			System.out.println(
+					"\n**No tienes pesajes registrados, o tus valores biometricos no aplican para este objetivo**");
 
 	}
 

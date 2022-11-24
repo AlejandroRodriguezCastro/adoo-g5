@@ -8,13 +8,14 @@ import models.Medicion;
 import models.Rutina;
 import models.objetivos.Objetivo;
 import valueObject.RutinaDto;
+import valueObject.SocioDto;
 
 public class RutinaController {
 
 	private static Rutina rutina = new Rutina();
 
-	public static Rutina crearRutina(Objetivo objetivo) {
-		return objetivo.CrearRutina();
+	public static Rutina crearRutina(Objetivo objetivo, SocioDto socioDto) {
+		return objetivo.CrearRutina(socioDto);
 	}
 
 	public static Rutina nuevaRutina(RutinaDto rutinaDto) {
