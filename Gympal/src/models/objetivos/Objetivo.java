@@ -29,7 +29,7 @@ public abstract class Objetivo implements IObserver {
 
 	public abstract Rutina CrearRutina(SocioDto socioDto);
 	
-	public abstract boolean objetivoAlcanzado();
+	public abstract boolean objetivoAlcanzado(SocioDto socioDto);
 	
 	public abstract void indicarObjetivo();
 

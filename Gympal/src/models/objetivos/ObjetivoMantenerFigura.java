@@ -140,14 +140,14 @@ public class ObjetivoMantenerFigura extends Objetivo {
 	}
 
 	@Override
-	public boolean objetivoAlcanzado() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
 	public void indicarObjetivo() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public boolean objetivoAlcanzado(SocioDto socioDto) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

@@ -16,6 +16,8 @@ public class SocioDto {
 	private Sexo sexo;
 	private Float altura;
 	private Float peso;
+	private Float IMC;
+	private Float grasa;
 	private String passwd;
 	private Boolean tieneObjetivo;
 	private Objetivo objetivo;
@@ -120,5 +122,21 @@ public class SocioDto {
 
 	public void setPeso(Float peso) {
 		this.peso = peso;
+	}
+
+	public Float getIMC() {
+		return IMC;
+	}
+
+	public void setIMC(Float iMC) {
+		IMC = iMC;
+	}
+
+	public Float getGrasa() {
+		return grasa;
+	}
+
+	public void setGrasa(Float grasa) {
+		this.grasa = grasa;
 	}
 }

@@ -8,25 +8,61 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
+import adapter.AdapterPesoIdeal;
+import adapter.AdapterValoresIdeales;
 import controllers.EntrenamientoController;
 import controllers.RutinaController;
 import models.Ejercicio;
 import models.Entrenamiento;
 import models.Rutina;
 import models.Interfaces.IObservable;
+import models.Interfaces.adapters.IAdapterPesoIdeal;
+import models.Interfaces.adapters.IAdapterValoresIdeales;
 import models.enums.GrupoMuscular;
+import models.enums.Sexo;
 import valueObject.EntrenamientoDto;
 import valueObject.RutinaDto;
 import valueObject.SocioDto;
 
 public class ObjetivoTonificarCuerpo extends Objetivo {
+
+	private IAdapterValoresIdeales valoresIdeales = new AdapterValoresIdeales();
+	private float IMCIdealMin;
+	private float IMCIdealMax;
+	private float grasaIdealMin;
+	private float grasaIdealMax;
+
 	@Override
 	public void serNotificadoPor(IObservable observable) {
 		return;
 	}
 
+	public float calcularIMCIdealMin(int edad, Sexo sexo) {
+		return this.valoresIdeales.obtenerIMCIdealMin(edad, sexo);
+	}
+
+	public float calcularIMCIdealMax(int edad, Sexo sexo) {
+		return this.valoresIdeales.obtenerIMCIdealMax(edad, sexo);
+	}
+
+	public float calcularGrasaIdealMin(int edad, Sexo sexo) {
+		return this.valoresIdeales.obtenerGrasaIdealMin(edad, sexo);
+	}
+
+	public float calcularGrasaIdealMax(int edad, Sexo sexo) {
+		return this.valoresIdeales.obtenerGrasaIdealMax(edad, sexo);
+	}
+
 	@Override
 	public Rutina CrearRutina(SocioDto socioDto) {
+
+		if (socioDto.getIMC() >= calcularIMCIdealMin(socioDto.getEdad(), socioDto.getSexo())
+				&& socioDto.getIMC() <= calcularIMCIdealMax(socioDto.getEdad(), socioDto.getSexo())) {
+			if (socioDto.getGrasa() >= calcularGrasaIdealMin(socioDto.getEdad(), socioDto.getSexo())
+					&& socioDto.getGrasa() <= calcularGrasaIdealMax(socioDto.getEdad(), socioDto.getSexo())) {
+				return null;
+			}
+		}
 
 		RutinaDto rutinaDto = new RutinaDto();
 		EntrenamientoDto entrenamientoDto = new EntrenamientoDto();
@@ -35,6 +71,10 @@ public class ObjetivoTonificarCuerpo extends Objetivo {
 		// int ejerciciosPorEntrenamiento = 4;
 		rutinaDto.setDiasCompletados(0);
 		rutinaDto.setDuracion(28);
+		this.setIMCIdealMin(calcularIMCIdealMin(socioDto.getEdad(), socioDto.getSexo()));
+		this.setIMCIdealMax(calcularIMCIdealMax(socioDto.getEdad(), socioDto.getSexo()));
+		this.setGrasaIdealMin(calcularGrasaIdealMin(socioDto.getEdad(), socioDto.getSexo()));
+		this.setGrasaIdealMax(calcularGrasaIdealMax(socioDto.getEdad(), socioDto.getSexo()));
 
 		for (int dia = 1; dia <= rutinaDto.getDuracion(); dia++) {
 
@@ -141,14 +181,51 @@ public class ObjetivoTonificarCuerpo extends Objetivo {
 	}
 
 	@Override
-	public boolean objetivoAlcanzado() {
-		// TODO Auto-generated method stub
+	public boolean objetivoAlcanzado(SocioDto socioDto) {
+		if (socioDto.getIMC() >= this.IMCIdealMin && socioDto.getIMC() <= this.IMCIdealMax) {
+				if(socioDto.getGrasa() >= this.grasaIdealMin && socioDto.getGrasa() <= this.grasaIdealMax)
+			return true;
+		}
 		return false;
 	}
 
 	@Override
 	public void indicarObjetivo() {
-		// TODO Auto-generated method stub
-		
+		System.out.println("\n*************META***********");
+		System.out.println("IMC entre: " + this.IMCIdealMin + "% - " + this.IMCIdealMax + "%");
+		System.out.println("Grasa entre: " + this.grasaIdealMin + "% - " + this.grasaIdealMax + "%");
+		System.out.println("****************************");
+	}
+
+	public float getIMCIdealMin() {
+		return IMCIdealMin;
+	}
+
+	public void setIMCIdealMin(float iMCIdealMin) {
+		IMCIdealMin = iMCIdealMin;
+	}
+
+	public float getIMCIdealMax() {
+		return IMCIdealMax;
+	}
+
+	public void setIMCIdealMax(float iMCIdealMax) {
+		IMCIdealMax = iMCIdealMax;
+	}
+
+	public float getGrasaIdealMin() {
+		return grasaIdealMin;
+	}
+
+	public void setGrasaIdealMin(float grasaIdealMin) {
+		this.grasaIdealMin = grasaIdealMin;
+	}
+
+	public float getGrasaIdealMax() {
+		return grasaIdealMax;
+	}
+
+	public void setGrasaIdealMax(float grasadealMax) {
+		this.grasaIdealMax = grasadealMax;
 	}
 }

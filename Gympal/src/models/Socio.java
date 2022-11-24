@@ -111,22 +111,40 @@ public class Socio {
 
 	}
 
-	private float pesoInicial() {
+	private float ultimoPeso() {
 		if (this.mediciones.size() == 0) {
 			return -1;
 		} else
 			return mediciones.get(mediciones.size() - 1).getPeso();
+	}
+	
+	private float ultimoIMC() {
+		if (this.mediciones.size() == 0) {
+			return -1;
+		} else
+			return mediciones.get(mediciones.size() - 1).getMasaMuscular();
+	}
+	
+	private float ultimoGrasa() {
+		if (this.mediciones.size() == 0) {
+			return -1;
+		} else
+			return mediciones.get(mediciones.size() - 1).getPorcentajeGrasaCorporal();
 	}
 
 	public EntrenamientoDto comenzarEntrenamiento() {
 		EntrenamientoDto entrenamientoDto = new EntrenamientoDto();
 		SocioDto socioDto = new SocioDto();
 		socioDto.setAltura(this.altura);
+		socioDto.setEdad(this.edad);
+		socioDto.setSexo(this.sexo);
+		socioDto.setGrasa(ultimoGrasa());
+		socioDto.setIMC(ultimoIMC());
 		if (this.objetivo.getRutina() == null) {
 
-			if (pesoInicial() != -1) {
+			if (ultimoPeso() != -1) {
 
-				this.objetivo.setPesoInicial(pesoInicial());
+				this.objetivo.setPesoInicial(ultimoPeso());
 
 				if (RutinaController.crearRutina(this.objetivo, socioDto) != null) {
 

@@ -179,8 +179,8 @@ public class ObjetivoBajarDePeso extends Objetivo {
 	}
 
 	@Override
-	public boolean objetivoAlcanzado() {
-		if (this.getPesoInicial() >= this.pesoIdealMin && this.getPesoInicial() <= this.pesoIdealMax) {
+	public boolean objetivoAlcanzado(SocioDto socioDto) {
+		if (socioDto.getPeso() >= this.pesoIdealMin && this.getPesoInicial() <= this.pesoIdealMax) {
 			return true;
 		}
 		return false;
