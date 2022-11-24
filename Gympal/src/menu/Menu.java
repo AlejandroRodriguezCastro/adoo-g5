@@ -139,6 +139,9 @@ public class Menu {
 			case 1:
 				SocioController.listar();
 				break;
+			case 2:
+				menuSetearObjetivo(socioDto);
+				break;
 			case 3:
 				subMenuPesarme();
 				// SocioController.listar();
