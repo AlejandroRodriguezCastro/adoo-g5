@@ -266,4 +266,16 @@ public class Socio {
 		}
 	}
 
+	public void terminarEntrenamiento() {
+		for (Entrenamiento e : this.objetivo.getRutina().getEntrenamientos()) {
+			if (e.getDia() == this.objetivo.getRutina().getDiasCompletados() + 1) {
+				this.objetivo.getRutina().diaCompletado();
+				EntrenamientoController.terminarEntrenamiento(e);
+				break;
+			}
+
+		}
+		
+	}
+
 }

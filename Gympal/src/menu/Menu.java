@@ -281,7 +281,7 @@ public class Menu {
 		System.out.println("******************************************************");
 		System.out.println("************** ELIGE LA OPCION ****************");
 		System.out.println("******************************************************");
-		opcion = menuOpciones(new String[] { "Reforzar ejercicio", "Terminar ejercicio", "Salir" });
+		opcion = menuOpciones(new String[] { "Reforzar ejercicio", "Terminar ejercicio", "Terminar entrenamiento","Salir" });
 		int ejercicio, series, repeticiones;
 		float pesoAsignado;
 
@@ -312,6 +312,10 @@ public class Menu {
 			subMenuEjercicios(socioDto);
 			break;
 		case 3:
+			SocioController.terminarEntrenamiento();
+			subMenuEjercicios(socioDto);
+			break;
+		case 4:
 			menuSocio(socioDto);
 			break;
 		}

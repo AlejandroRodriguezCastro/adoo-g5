@@ -89,6 +89,11 @@ public class SocioController {
 		dataSets.guardarSocio(socio);
 
 	}
+	
+	public static void terminarEntrenamiento() {
+		socio.terminarEntrenamiento();
+		dataSets.guardarSocio(socio);
+	}
 
 	public static List<EntrenamientoDto> registroEntrenamiento() {
 		SocioDto socioDto = new SocioDto();
