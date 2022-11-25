@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
+import configuracion.VariacionPeso;
 import controllers.EntrenamientoController;
 import controllers.RutinaController;
 import models.Ejercicio;
@@ -20,6 +21,9 @@ import valueObject.RutinaDto;
 import valueObject.SocioDto;
 
 public class ObjetivoMantenerFigura extends Objetivo {
+
+	private VariacionPeso variacion = new VariacionPeso();
+
 	@Override
 	public void serNotificadoPor(IObservable observable) {
 		return;
@@ -141,13 +145,25 @@ public class ObjetivoMantenerFigura extends Objetivo {
 
 	@Override
 	public void indicarObjetivo() {
-		// TODO Auto-generated method stub
-		
+		System.out.println("\n*************META***********");
+		System.out.println("Deberas mantener tu peso entre: " + (this.getPesoInicial() - this.variacion.getVariacion())
+				+ "kg - " + (this.getPesoInicial() + this.variacion.getVariacion()) + "kg");
+		System.out.println("****************************");
 	}
 
 	@Override
 	public boolean objetivoAlcanzado(SocioDto socioDto) {
-		// TODO Auto-generated method stub
+		if (socioDto.getPeso() >= (this.getPesoInicial() - this.variacion.getVariacion())
+				&& socioDto.getPeso() <= (this.getPesoInicial() + this.variacion.getVariacion()))
+			return true;
 		return false;
+	}
+
+	public VariacionPeso getVariacion() {
+		return variacion;
+	}
+
+	public void setVariacion(VariacionPeso variacion) {
+		this.variacion = variacion;
 	}
 }
