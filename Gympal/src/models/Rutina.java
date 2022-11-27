@@ -1,38 +1,23 @@
 package models;
 
+import main.Main;
+import menu.Menu;
 import models.enums.Dias;
 import models.enums.ExigenciaMuscular;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import dataSets.DataSets;
 
 public class Rutina {
+	private Calendar comienzo;
 	private List<Entrenamiento> entrenamientos;
-	// private List<Dias> diasDeEntrenamiento;
-	private int duracion;
 	private int diasCompletados;
 
-	public Rutina(List<Dias> diasDeEntrenamiento, Integer duracion) {
-		// this.diasDeEntrenamiento = diasDeEntrenamiento;
-		this.duracion = duracion;
-	}
-
-	/*
-	 * public List<Dias> getDiasDeEntrenamiento() { return diasDeEntrenamiento; }
-	 */
-
 	public Rutina() {
-		// TODO Auto-generated constructor stub
-	}
-
-	public int getDuracion() {
-		return duracion;
-	}
-
-	public void setDuracion(int duracion) {
-		this.duracion = duracion;
+		this.comienzo = Main.fechaDeHoy;
 	}
 
 	public int getDiasCompletados() {
@@ -82,7 +67,7 @@ public class Rutina {
 
 	@Override
 	public String toString() {
-		return "\nRutina [duracion=" + duracion + ", diasCompletados="
+		return "\nRutina [diasCompletados="
 				+ diasCompletados + "]";
 	}
 	

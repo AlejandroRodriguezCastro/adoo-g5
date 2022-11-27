@@ -22,7 +22,6 @@ public class RutinaController {
 		rutina = new Rutina();
 		rutina.setDiasCompletados(rutinaDto.getDiasCompletados());
 		rutina.setEntrenamientos(rutinaDto.getEntrenamientos());
-		rutina.setDuracion(rutinaDto.getDuracion());
 		return rutina;
 	}
 

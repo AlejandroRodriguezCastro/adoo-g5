@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
 
-import adapter.AdapterPesoIdeal;
 import adapter.AdapterValoresIdeales;
 import controllers.EntrenamientoController;
 import controllers.RutinaController;
@@ -16,7 +15,6 @@ import models.Ejercicio;
 import models.Entrenamiento;
 import models.Rutina;
 import models.Interfaces.IObservable;
-import models.Interfaces.adapters.IAdapterPesoIdeal;
 import models.Interfaces.adapters.IAdapterValoresIdeales;
 import models.enums.GrupoMuscular;
 import models.enums.Sexo;
@@ -66,9 +64,7 @@ public class ObjetivoTonificarCuerpo extends Objetivo {
 
 		RutinaDto rutinaDto = new RutinaDto();
 		EntrenamientoDto entrenamientoDto = new EntrenamientoDto();
-		Calendar c1 = Calendar.getInstance();
 		List<Entrenamiento> entrenamientos = new ArrayList<>();
-		// int ejerciciosPorEntrenamiento = 4;
 		rutinaDto.setDiasCompletados(0);
 		rutinaDto.setDuracion(28);
 		this.setIMCIdealMin(calcularIMCIdealMin(socioDto.getEdad(), socioDto.getSexo()));
@@ -78,7 +74,7 @@ public class ObjetivoTonificarCuerpo extends Objetivo {
 
 		for (int dia = 1; dia <= rutinaDto.getDuracion(); dia++) {
 
-			Map<Integer, Ejercicio> ejercicios = new HashMap<Integer, Ejercicio>();
+			Map<Integer, Ejercicio> ejercicios = new HashMap<>();
 
 			if (dia == 1) {
 				Date dt = new Date();

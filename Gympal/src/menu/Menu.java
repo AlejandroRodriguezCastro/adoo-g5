@@ -1,9 +1,11 @@
 package menu;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.Map.Entry;
 
 import controllers.SocioController;
+import main.Main;
 import models.Ejercicio;
 import models.enums.Dias;
 import models.enums.Sexo;
@@ -118,20 +120,24 @@ public class Menu {
 
     public static void menuSocio(SocioDto socioDto) {
 
+        String[] arrayOpciones = new String[]{"Datos Personales", "Cambiar Objetivo", "Pesarme",
+                "Comenzar Entrenamiento", "Registro de entrenamientos", "Mis Trofeos", "avanzarDía", "Salir"};
         if (!socioDto.getTieneObjetivo()) {
             menuSetearObjetivo(socioDto);
         }
 
         int opcion;
         sc = new Scanner(System.in);
+
         do {
             System.out.println();
             System.out.println("********************* BIENVENIDO *********************");
             System.out.println("****************** " + socioDto.getNombre() + " " + socioDto.getApellido()
                     + " ********************");
             System.out.println("******************************************************");
-            opcion = menuOpciones(new String[]{"Datos Personales", "Cambiar Objetivo", "Pesarme",
-                    "Comenzar Entrenamiento", "Registro de entrenamientos", "Mis Trofeos", "Salir"});
+
+            System.out.println("fecha actual --> " + new SimpleDateFormat("EEEE d 'de' MMMM 'de' yyyy", new Locale("es", "ES")).format(Main.fechaDeHoy.getTime()));
+            opcion = menuOpciones(arrayOpciones);
             switch (opcion) {
                 case 1:
                     SocioController.listar();
@@ -176,12 +182,15 @@ public class Menu {
                         }
                     } else
                         System.out.println("\n**No tienes entrenamientos comenzados**");
+                    break;
 
+                case 7:
+                    Main.fechaDeHoy.add(Calendar.DAY_OF_WEEK, 1);
                     break;
 
             }
 
-        } while (opcion != 7);
+        } while (opcion != arrayOpciones.length);
 
     }
 
@@ -287,14 +296,14 @@ public class Menu {
         System.out.print("6. SABADO");
         System.out.print("7. DOMINGO");
         System.out.print("0. SALIR");
-        do{
+        do {
             opcion = sc.nextInt();
-            if (opcion <=7 && opcion != 0){
+            if (opcion <= 7 && opcion != 0) {
                 diasDeEntrenamiento.add(Dias.fromInteger(opcion - 1));
-            }else if(opcion != 0){
+            } else if (opcion != 0) {
                 System.out.print("opcion no valida. intente de nuevo");
             }
-        }while(opcion != 0 && diasDeEntrenamiento.size() < 7);
+        } while (opcion != 0 && diasDeEntrenamiento.size() < 7);
         SocioController.setearDiasDeEntrenamiento(diasDeEntrenamiento);
 
     }
