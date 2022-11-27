@@ -1,12 +1,11 @@
 package menu;
 
-import java.util.Calendar;
-import java.util.List;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Scanner;
 
 import controllers.SocioController;
 import models.Ejercicio;
+import models.enums.Dias;
 import models.enums.Sexo;
 import models.objetivos.Objetivo;
 import models.objetivos.ObjetivoBajarDePeso;
@@ -142,7 +141,6 @@ public class Menu {
                     break;
                 case 3:
                     subMenuPesarme();
-                    // SocioController.listar();
                     break;
                 case 4:
                     subMenuEjercicios(socioDto);
@@ -268,6 +266,37 @@ public class Menu {
 
                 break;
         }
+    }
+
+    public static void subMenuIngresarDiasDeEntrenamiento() {
+        int opcion = 0;
+        sc = new Scanner(System.in);
+        Set<Dias> diasDeEntrenamiento = new HashSet<>() {
+        };
+
+        System.out.println();
+        System.out.println("******************************************************");
+        System.out.println("************** DIAS DE ENTRENAMIENTO ****************");
+        System.out.println("******************************************************");
+        System.out.print("Indique que dias desea realizar actividad fisica (puede ingresar mas de una opcion seguida de enter):");
+        System.out.print("1. LUNES");
+        System.out.print("2. MARTES");
+        System.out.print("3. MIERCOLES");
+        System.out.print("4. JUEVES");
+        System.out.print("5. VIERNES");
+        System.out.print("6. SABADO");
+        System.out.print("7. DOMINGO");
+        System.out.print("0. SALIR");
+        do{
+            opcion = sc.nextInt();
+            if (opcion <=7 && opcion != 0){
+                diasDeEntrenamiento.add(Dias.fromInteger(opcion - 1));
+            }else if(opcion != 0){
+                System.out.print("opcion no valida. intente de nuevo");
+            }
+        }while(opcion != 0 && diasDeEntrenamiento.size() < 7);
+        SocioController.setearDiasDeEntrenamiento(diasDeEntrenamiento);
+
     }
 
     public static void subMenuEjercicio(SocioDto socioDto) {

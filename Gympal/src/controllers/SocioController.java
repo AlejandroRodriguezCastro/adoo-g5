@@ -1,12 +1,14 @@
 package controllers;
 
 import java.util.List;
+import java.util.Set;
 
 import adapter.LoginAdapter;
 import dataSets.DataSets;
 import models.Interfaces.adapters.IAdapterAutenticator;
 import models.Medicion;
 import models.Socio;
+import models.enums.Dias;
 import models.objetivos.Objetivo;
 import valueObject.EjercicioDto;
 import valueObject.EntrenamientoDto;
@@ -55,6 +57,10 @@ public class SocioController {
 
     public static void setearObjetivo(Objetivo objetivo) {
         socio.setearObjetvo(objetivo);
+    }
+
+    public static void setearDiasDeEntrenamiento(Set<Dias> diasDeEntrenamiento) {
+        socio.setDiasDeEntrenamiento(diasDeEntrenamiento.stream().toList());
     }
 
     public static EntrenamientoDto comenzarEntrenamiento() {
