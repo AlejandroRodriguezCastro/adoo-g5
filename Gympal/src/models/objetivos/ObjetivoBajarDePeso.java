@@ -52,7 +52,6 @@ public class ObjetivoBajarDePeso extends Objetivo {
 		RutinaDto rutinaDto = new RutinaDto();
 		EntrenamientoDto entrenamientoDto = new EntrenamientoDto();
 		List<Entrenamiento> entrenamientos = new ArrayList<>();
-		// int ejerciciosPorEntrenamiento = 4;
 		rutinaDto.setDiasCompletados(0);
 		rutinaDto.setDuracion(28);
 		this.setPesoIdealMin(calcularPesoIdealMin(socioDto.getAltura()));

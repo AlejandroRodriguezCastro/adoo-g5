@@ -5,155 +5,125 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
-import valueObject.EjercicioDto;
 import valueObject.EntrenamientoDto;
-import valueObject.SocioDto;
 
 public class Entrenamiento {
 
-	// private List<Ejercicio> Ejercicios;
-	private Map<Integer, Ejercicio> Ejercicios = new HashMap<Integer, Ejercicio>();
-	private int dia;
-	private int cantidadEjercicios;
-	private int ejerciciosCompletados;
-	private List<Integer> ejerciciosFinalizados = new ArrayList<>();
-	private Calendar fechaAsignada;
-	private Calendar fechaEjecucion;
+    private Map<Integer, Ejercicio> ejercicios = new HashMap<>();
+    private int dia;
+    private List<Integer> ejerciciosFinalizados = new ArrayList<>();
+    private Calendar fechaAsignada;
+    private Calendar fechaEjecucion;
 
-	public Entrenamiento(Map<Integer, Ejercicio> ejercicios) {
-		super();
-		Ejercicios = ejercicios;
-	}
+    public Entrenamiento(Map<Integer, Ejercicio> ejercicios) {
+        super();
+        this.ejercicios = ejercicios;
+    }
 
-	public Entrenamiento() {
-		// TODO Auto-generated constructor stub
-	}
+    public Entrenamiento() {
+        // TODO Auto-generated constructor stub
+    }
 
-	/*
-	 * public List<Ejercicio> getEjercicios() { return Ejercicios; }
-	 */
+    public int getDia() {
+        return dia;
+    }
 
-	public int getDia() {
-		return dia;
-	}
+    public void setDia(int dia) {
+        this.dia = dia;
+    }
 
-	public void setDia(int dia) {
-		this.dia = dia;
-	}
+    public Calendar getFechaAsignada() {
+        return fechaAsignada;
+    }
 
-	public Calendar getFechaAsignada() {
-		return fechaAsignada;
-	}
+    public void setFechaAsignada(Calendar fechaAsignada) {
+        this.fechaAsignada = fechaAsignada;
+    }
 
-	public void setFechaAsignada(Calendar fechaAsignada) {
-		this.fechaAsignada = fechaAsignada;
-	}
+    public Calendar getFechaEjecucion() {
+        return fechaEjecucion;
+    }
 
-	public Calendar getFechaEjecucion() {
-		return fechaEjecucion;
-	}
+    public void setFechaEjecucion(Calendar fechaEjecucion) {
+        this.fechaEjecucion = fechaEjecucion;
+    }
 
-	public void setFechaEjecucion(Calendar fechaEjecucion) {
-		this.fechaEjecucion = fechaEjecucion;
-	}
+    @Override
+    public String toString() {
+        return "\nEntrenamiento [dia=" + dia + ", cantidadEjercicios=" + ejercicios.size() + ", ejerciciosCompletados="
+                + ejerciciosFinalizados.size() + " fechaAsignada=" + fechaAsignada.get(Calendar.DATE) + "/"
+                + fechaAsignada.get(Calendar.MONTH) + "/" + fechaAsignada.get(Calendar.YEAR) + ", fechaEjecucion="
+                + fechaEjecucion.get(Calendar.DATE) + "/" + fechaEjecucion.get(Calendar.MONTH) + "/"
+                + fechaEjecucion.get(Calendar.YEAR) + "\nEjercicios=" + ejercicios + "]";
+    }
 
-	/*
-	 * public void setEjercicios(List<Ejercicio> ejercicios) { Ejercicios =
-	 * ejercicios; }
-	 */
+    public int getEjerciciosCompletados() {
+        return ejerciciosFinalizados.size();
+    }
 
-	@Override
-	public String toString() {
-		return "\nEntrenamiento [dia=" + dia + ", cantidadEjercicios=" + cantidadEjercicios + ", ejerciciosCompletados="
-				+ ejerciciosCompletados + " fechaAsignada=" + fechaAsignada.get(Calendar.DATE) + "/"
-				+ fechaAsignada.get(Calendar.MONTH) + "/" + fechaAsignada.get(Calendar.YEAR) + ", fechaEjecucion="
-				+ fechaEjecucion.get(Calendar.DATE) + "/" + fechaEjecucion.get(Calendar.MONTH) + "/"
-				+ fechaEjecucion.get(Calendar.YEAR) + "\nEjercicios=" + Ejercicios + "]";
-	}
+    public int getCantidadEjercicios() {
+        return ejercicios.size();
+    }
 
-	public int getEjerciciosCompletados() {
-		return ejerciciosCompletados;
-	}
+    public Map<Integer, Ejercicio> getEjercicios() {
+        return ejercicios;
+    }
 
-	public void setEjerciciosCompletados(int ejerciciosCompletados) {
-		this.ejerciciosCompletados = ejerciciosCompletados;
-	}
+    public void setEjercicios(Map<Integer, Ejercicio> ejercicios) {
+        this.ejercicios = ejercicios;
+    }
 
-	public int getCantidadEjercicios() {
-		return cantidadEjercicios;
-	}
+    public List<Integer> getEjerciciosFinalizados() {
+        return ejerciciosFinalizados;
+    }
 
-	public void setCantidadEjercicios(int cantidadEjercicios) {
-		this.cantidadEjercicios = cantidadEjercicios;
-	}
+    public int terminarEjercicio(int ejercicio) {
+        this.ejerciciosFinalizados.add(ejercicio);
+        return ejercicios.size() - ejerciciosFinalizados.size();
+    }
 
-	public Map<Integer, Ejercicio> getEjercicios() {
-		return Ejercicios;
-	}
+    public void terminarEntrenamiento() {
+        this.fechaEjecucion = Calendar.getInstance();
+    }
 
-	public void setEjercicios(Map<Integer, Ejercicio> ejercicios) {
-		Ejercicios = ejercicios;
-	}
+    public List<EntrenamientoDto> registroEntrenamiento(Rutina rutina) {
 
-	public List<Integer> getEjerciciosFinalizados() {
-		return ejerciciosFinalizados;
-	}
+        List<EntrenamientoDto> ListEntrenamientos = new ArrayList<>();
+        boolean tieneEjerciciosFinalizados = false;
 
-	public void setEjerciciosFinalizados(List<Integer> ejerciciosFinalizados) {
-		this.ejerciciosFinalizados = ejerciciosFinalizados;
-	}
+        System.out.println(rutina.toString());
 
-	public int terminarEjercicio(int ejercicio) {
-		this.ejerciciosFinalizados.add(ejercicio);
-		this.ejerciciosCompletados += 1;
-		return this.cantidadEjercicios - this.ejerciciosCompletados;
-	}
+        for (Entrenamiento entrenamientos : rutina.getEntrenamientos()) {
 
-	public void terminarEntrenamiento() {
-		Calendar c1 = Calendar.getInstance();
-		this.fechaEjecucion = c1;
-	}
+            boolean guardar = false;
 
-	public List<EntrenamientoDto> registroEntrenamiento(SocioDto socioDto) {
-		List<EntrenamientoDto> entrenamientos = new ArrayList<>();
-		boolean tieneEjerciciosFinalizados = false;
+            Map<Integer, Ejercicio> ejercicios = new HashMap<>();
 
-		System.out.println(socioDto.getObjetivo().getRutina().toString());
+            for (Integer ejercicioFinalizado : entrenamientos.getEjerciciosFinalizados()) {
 
-		for (Entrenamiento e : socioDto.getObjetivo().getRutina().getEntrenamientos()) {
+                if (entrenamientos.getEjercicios().containsKey(ejercicioFinalizado)) {
+                    ejercicios.put(ejercicioFinalizado, entrenamientos.getEjercicios().get(ejercicioFinalizado));
+                    tieneEjerciciosFinalizados = true;
+                    guardar = true;
+                }
+            }
 
-			boolean guardar = false;
-			EntrenamientoDto entrenamientoDto = new EntrenamientoDto();
-			Map<Integer, Ejercicio> Ejercicios = new HashMap<Integer, Ejercicio>();
-			entrenamientoDto.setDia(e.getDia());
-			entrenamientoDto.setCantidadEjercicios(e.getCantidadEjercicios());
-			entrenamientoDto.setEjerciciosCompletados(e.getEjerciciosCompletados());
-			entrenamientoDto.setFechaAsignada(e.getFechaAsignada());
-			entrenamientoDto.setFechaEjecucion(e.getFechaEjecucion());
+            EntrenamientoDto entrenamientoDto = new EntrenamientoDto();
+            entrenamientoDto.setDia(entrenamientos.getDia());
+            entrenamientoDto.setCantidadEjercicios(entrenamientos.getCantidadEjercicios());
+            entrenamientoDto.setEjerciciosCompletados(entrenamientos.getEjerciciosCompletados());
+            entrenamientoDto.setFechaAsignada(entrenamientos.getFechaAsignada());
+            entrenamientoDto.setFechaEjecucion(entrenamientos.getFechaEjecucion());
+            entrenamientoDto.setEjercicios(ejercicios);
+            if (guardar)
+                ListEntrenamientos.add(entrenamientoDto);
 
-			for (Entry<Integer, Ejercicio> entry : e.getEjercicios().entrySet()) {
-				for (Integer i : e.getEjerciciosFinalizados()) {
-
-					if (i == entry.getKey()) {
-						Ejercicios.put(i, entry.getValue());
-						tieneEjerciciosFinalizados = true;
-						guardar = true;
-					}
-
-				}
-			}
-
-			entrenamientoDto.setEjercicios(Ejercicios);
-			if (guardar)
-				entrenamientos.add(entrenamientoDto);
-
-		}
-		if (tieneEjerciciosFinalizados)
-			return entrenamientos;
-		else
-			return null;
-	}
+        }
+        if (tieneEjerciciosFinalizados)
+            return ListEntrenamientos;
+        else
+            return null;
+    }
 
 }

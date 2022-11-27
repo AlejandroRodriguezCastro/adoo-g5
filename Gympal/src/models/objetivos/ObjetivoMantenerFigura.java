@@ -34,15 +34,13 @@ public class ObjetivoMantenerFigura extends Objetivo {
 
 		RutinaDto rutinaDto = new RutinaDto();
 		EntrenamientoDto entrenamientoDto = new EntrenamientoDto();
-		Calendar c1 = Calendar.getInstance();
 		List<Entrenamiento> entrenamientos = new ArrayList<>();
-		// int ejerciciosPorEntrenamiento = 4;
 		rutinaDto.setDiasCompletados(0);
 		rutinaDto.setDuracion(28);
 
 		for (int dia = 1; dia <= rutinaDto.getDuracion(); dia++) {
 
-			Map<Integer, Ejercicio> ejercicios = new HashMap<Integer, Ejercicio>();
+			Map<Integer, Ejercicio> ejercicios = new HashMap<>();
 
 			if (dia == 1) {
 				Date dt = new Date();
@@ -114,8 +112,10 @@ public class ObjetivoMantenerFigura extends Objetivo {
 				indiceAleatorio = numeroAleatorioEnRango(0, ejerciciosAuxiliares.size() - 1);
 
 				for (int j : ejerciciosDisponibles) {
-					if (j == indiceAleatorio)
+					if (j == indiceAleatorio) {
 						repetido = true;
+						break;
+					}
 				}
 
 				if (!repetido) {
@@ -146,17 +146,16 @@ public class ObjetivoMantenerFigura extends Objetivo {
 	@Override
 	public void indicarObjetivo() {
 		System.out.println("\n*************META***********");
-		System.out.println("Deberas mantener tu peso entre: " + (this.getPesoInicial() - this.variacion.getVariacion())
-				+ "kg - " + (this.getPesoInicial() + this.variacion.getVariacion()) + "kg");
+		float pesoLimite = this.getPesoInicial() - this.variacion.getVariacion();
+		System.out.println("Deberas mantener tu peso entre: " + pesoLimite
+				+ "kg - " + pesoLimite + "kg");
 		System.out.println("****************************");
 	}
 
 	@Override
 	public boolean objetivoAlcanzado(SocioDto socioDto) {
-		if (socioDto.getPeso() >= (this.getPesoInicial() - this.variacion.getVariacion())
-				&& socioDto.getPeso() <= (this.getPesoInicial() + this.variacion.getVariacion()))
-			return true;
-		return false;
+		return socioDto.getPeso() >= (this.getPesoInicial() - this.variacion.getVariacion())
+				&& socioDto.getPeso() <= (this.getPesoInicial() + this.variacion.getVariacion());
 	}
 
 	public VariacionPeso getVariacion() {

@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dataSets.DataSets;
-import models.enums.Dias;
 
 public class Rutina {
 	private List<Entrenamiento> entrenamientos;
@@ -53,9 +52,8 @@ public class Rutina {
 	}
 
 	public List<Ejercicio> ejerciciosBajarPeso() {
-		DataSets dataSets = DataSets.getDataSet();
 		List<Ejercicio> ejercicios = new ArrayList<>();
-		for (Ejercicio e : dataSets.getEjercicios()) {
+		for (Ejercicio e : DataSets.getEjercicios()) {
 			if (e.getNivelAerobico() >= 3)
 				ejercicios.add(e);
 		}
@@ -63,9 +61,8 @@ public class Rutina {
 	}
 
 	public List<Ejercicio> ejerciciosTonificar() {
-		DataSets dataSets = DataSets.getDataSet();
 		List<Ejercicio> ejercicios = new ArrayList<>();
-		for (Ejercicio e : dataSets.getEjercicios()) {
+		for (Ejercicio e : DataSets.getEjercicios()) {
 			if (e.getNivelAerobico() <= 4 && e.getExigenciaMuscular() == ExigenciaMuscular.ALTA)
 				ejercicios.add(e);
 		}
@@ -73,9 +70,8 @@ public class Rutina {
 	}
 
 	public List<Ejercicio> ejerciciosMantenerFigura() {
-		DataSets dataSets = DataSets.getDataSet();
 		List<Ejercicio> ejercicios = new ArrayList<>();
-		for (Ejercicio e : dataSets.getEjercicios()) {
+		for (Ejercicio e : DataSets.getEjercicios()) {
 			if ((e.getNivelAerobico() >= 2 && e.getNivelAerobico() <= 4)
 					&& ((e.getExigenciaMuscular() == ExigenciaMuscular.MEDIA)
 							|| (e.getExigenciaMuscular() == ExigenciaMuscular.BAJA))) 

@@ -4,9 +4,9 @@ import java.util.List;
 
 import models.Ejercicio;
 import models.Entrenamiento;
+import models.Rutina;
 import valueObject.EjercicioDto;
 import valueObject.EntrenamientoDto;
-import valueObject.SocioDto;
 
 public class EntrenamientoController {
 	
@@ -18,8 +18,6 @@ public class EntrenamientoController {
 		entrenamiento.setFechaAsignada(entrenamientoDto.getFechaAsignada());
 		entrenamiento.setEjercicios(entrenamientoDto.getEjercicios());
 		entrenamiento.setFechaEjecucion(entrenamientoDto.getFechaEjecucion());
-		entrenamiento.setCantidadEjercicios(entrenamientoDto.getCantidadEjercicios());
-		entrenamiento.setEjerciciosCompletados(entrenamientoDto.getEjerciciosCompletados());
 		return entrenamiento;
 	}
 	
@@ -35,8 +33,8 @@ public class EntrenamientoController {
 		ejercicio.reforzarEjercicio(ejercicioDto);
 	}
 	
-	public static List<EntrenamientoDto> registroEntrenamiento(SocioDto socioDto) {
-		return entrenamiento.registroEntrenamiento(socioDto);
+	public static List<EntrenamientoDto> registroEntrenamiento(Rutina rutina) {
+		return entrenamiento.registroEntrenamiento(rutina);
 	}
 
 }
