@@ -7,8 +7,9 @@ import dataSets.DataSets;
 import models.Interfaces.adapters.IAdapterAutenticator;
 import models.Medicion;
 import models.Socio;
-import models.Trofeo;
-import models.objetivos.Objetivo;
+import models.objetivos.ObjetivoBajarDePeso;
+import models.objetivos.ObjetivoMantenerFigura;
+import models.objetivos.ObjetivoTonificarCuerpo;
 import valueObject.EjercicioDto;
 import valueObject.EntrenamientoDto;
 import valueObject.MedicionDto;
@@ -45,14 +46,17 @@ public class SocioController {
 	}
 
 	public static void pesarSocio() {
-		List<Medicion> mediciones = new ArrayList<>();
-		mediciones = socio.getMediciones();
-		mediciones.add(MedicionController.nuevaMedicion(socio.realizarMedicion()));
-		socio.setMediciones(mediciones);
+		//medicion sistema
+		//List<Medicion> mediciones = new ArrayList<>();
+		//mediciones = socio.getMediciones();
+		//mediciones.add(MedicionController.nuevaMedicion(socio.realizarMedicion()));
+		//socio.setMediciones(mediciones);
+		socio.addMedicion(MedicionController.nuevaMedicion(socio.realizarMedicion()));
 		dataSets.guardarSocio(socio);
 	}
 
 	public static void registrarPesaje(MedicionDto medicionDto) {
+		//medición manual
 		List<Medicion> mediciones = new ArrayList<>();
 		mediciones = socio.getMediciones();
 		mediciones.add(MedicionController.nuevaMedicion(medicionDto));
@@ -60,8 +64,18 @@ public class SocioController {
 		dataSets.guardarSocio(socio);
 	}
 
-	public static void setearObjetivo(Objetivo objetivo) {
-		socio.setearObjetivo(objetivo);
+	public static void setearObjetivo(int objetivo) {
+		switch (objetivo) {
+		case 1:
+			socio.setearObjetivo(new ObjetivoBajarDePeso());
+			break;
+		case 2:
+			socio.setearObjetivo(new ObjetivoMantenerFigura());
+			break;
+		case 3:
+			socio.setearObjetivo(new ObjetivoTonificarCuerpo());
+			break;
+		}
 	}
 
 	public static EntrenamientoDto comenzarEntrenamiento() {

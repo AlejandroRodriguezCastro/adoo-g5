@@ -3,17 +3,11 @@ package menu;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Scanner;
 import controllers.SocioController;
 import models.Ejercicio;
-import models.Entrenamiento;
 import models.enums.Sexo;
-import models.objetivos.Objetivo;
-import models.objetivos.ObjetivoBajarDePeso;
-import models.objetivos.ObjetivoMantenerFigura;
-import models.objetivos.ObjetivoTonificarCuerpo;
 import valueObject.EjercicioDto;
 import valueObject.EntrenamientoDto;
 import valueObject.MedicionDto;
@@ -355,23 +349,10 @@ public class Menu {
 		System.out.println("************** SELECCION DE OBJETIVOS ****************");
 		System.out.println("******************************************************");
 		opcion = menuOpciones(new String[] { "Bajar de Peso", "Mantener Figura", "Tonificar Cuerpo" });
-
-		Objetivo objetivo = null;
-		switch (opcion) {
-		case 1:
-			objetivo = new ObjetivoBajarDePeso();
-			socioDto.setTieneObjetivo(true);
-			break;
-		case 2:
-			objetivo = new ObjetivoMantenerFigura();
-			socioDto.setTieneObjetivo(true);
-			break;
-		case 3:
-			objetivo = new ObjetivoTonificarCuerpo();
-			socioDto.setTieneObjetivo(true);
-			break;
-		}
-		SocioController.setearObjetivo(objetivo);
+		
+		//menú NO debe ser el responsable por crear objetivos
+		SocioController.setearObjetivo(opcion);
+		socioDto.setTieneObjetivo(true);
 	}
 
 	public static int menuOpciones(String[] opciones) {

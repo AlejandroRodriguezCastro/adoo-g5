@@ -1,19 +1,13 @@
 package models.objetivos;
 
-import models.Interfaces.IObserver;
 import valueObject.SocioDto;
 import models.Rutina;
-import models.Socio;
+import models.Interfaces.IObjetivo;
 
-public abstract class Objetivo implements IObserver {
+public abstract class Objetivo implements IObjetivo{
 
-    private Socio socio;
     private Float pesoInicial;
     private Rutina rutina;
-
-    public Socio getSocio() {
-        return socio;
-    }
 
     public Float getPesoInicial() {
         return pesoInicial;
@@ -32,10 +26,6 @@ public abstract class Objetivo implements IObserver {
 	public abstract boolean objetivoAlcanzado(SocioDto socioDto);
 	
 	public abstract void indicarObjetivo();
-
-	public void setSocio(Socio socio) {
-		this.socio = socio;
-	}
 
 	public void setPesoInicial(Float pesoInicial) {
 		this.pesoInicial = pesoInicial;

@@ -163,7 +163,7 @@ public class DataSets {
 		return usuarios.stream().filter(socio -> socio.getDocumento().equals(documento)).findFirst().orElse(null);
 	}
 
-	public static ArrayList<Ejercicio> getEjercicios() {
+	public ArrayList<Ejercicio> getEjercicios() {
 		return ejercicios;
 	}
 	

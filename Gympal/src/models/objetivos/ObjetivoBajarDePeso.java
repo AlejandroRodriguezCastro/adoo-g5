@@ -14,8 +14,6 @@ import controllers.RutinaController;
 import models.Ejercicio;
 import models.Entrenamiento;
 import models.Rutina;
-import models.Interfaces.IObservable;
-import models.Interfaces.adapters.IAdapterAutenticator;
 import models.Interfaces.adapters.IAdapterPesoIdeal;
 import models.enums.GrupoMuscular;
 import valueObject.EntrenamientoDto;
@@ -27,11 +25,6 @@ public class ObjetivoBajarDePeso extends Objetivo {
 	private IAdapterPesoIdeal pesoIdeal = new AdapterPesoIdeal();
 	private float pesoIdealMin;
 	private float pesoIdealMax;
-
-	@Override
-	public void serNotificadoPor(IObservable observable) {
-		return;
-	}
 
 	public float calcularPesoIdealMin(float altura) {
 		return this.pesoIdeal.obtenerPesoIdealMin(altura);

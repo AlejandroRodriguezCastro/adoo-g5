@@ -7,14 +7,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
-
 import configuracion.VariacionPeso;
 import controllers.EntrenamientoController;
 import controllers.RutinaController;
 import models.Ejercicio;
 import models.Entrenamiento;
 import models.Rutina;
-import models.Interfaces.IObservable;
 import models.enums.GrupoMuscular;
 import valueObject.EntrenamientoDto;
 import valueObject.RutinaDto;
@@ -25,16 +23,11 @@ public class ObjetivoMantenerFigura extends Objetivo {
 	private VariacionPeso variacion = new VariacionPeso();
 
 	@Override
-	public void serNotificadoPor(IObservable observable) {
-		return;
-	}
-
-	@Override
 	public Rutina CrearRutina(SocioDto socioDto) {
 
 		RutinaDto rutinaDto = new RutinaDto();
 		EntrenamientoDto entrenamientoDto = new EntrenamientoDto();
-		Calendar c1 = Calendar.getInstance();
+		//Calendar c1 = Calendar.getInstance();
 		List<Entrenamiento> entrenamientos = new ArrayList<>();
 		// int ejerciciosPorEntrenamiento = 4;
 		rutinaDto.setDiasCompletados(0);

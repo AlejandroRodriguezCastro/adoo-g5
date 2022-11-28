@@ -4,9 +4,11 @@ import adapter.LoginAdapter;
 import controllers.EntrenamientoController;
 import controllers.MedicionController;
 import controllers.RutinaController;
+import models.Interfaces.IObjetivo;
+import models.Interfaces.IObservable;
+import models.Interfaces.IObserverTrofeos;
 import models.Interfaces.adapters.IAdapterAutenticator;
 import models.enums.Sexo;
-import models.objetivos.Objetivo;
 import valueObject.EjercicioDto;
 import valueObject.EntrenamientoDto;
 import valueObject.MedicionDto;
@@ -15,7 +17,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class Socio {
+public class Socio implements IObservable{
 	private static int Socios = 123456;
 	private String nombre;
 	private String apellido;
@@ -25,9 +27,11 @@ public class Socio {
 	private Sexo sexo;
 	private Float altura;
 	private List<Medicion> mediciones;
-	private Objetivo objetivo;
+	private IObjetivo objetivo;
 	private List<Trofeo> trofeos;
 	private IAdapterAutenticator autenticador;
+	private Calendar fechaUltimaMedicion;
+	private int medicionesMesActual;
 
 	public Socio() {
 		this.autenticador = new LoginAdapter();
@@ -44,6 +48,7 @@ public class Socio {
 		this.altura = altura;
 		this.mediciones = new ArrayList<>();
 		this.trofeos = new ArrayList<Trofeo>();
+		this.medicionesMesActual = 0;
 	}
 
 	public Socio(String nombre, String apellido, String documento, Integer edad, Sexo sexo, Float altura) {
@@ -57,6 +62,7 @@ public class Socio {
 		this.altura = altura;
 		this.mediciones = new ArrayList<>();
 		this.trofeos = new ArrayList<Trofeo>();
+		this.medicionesMesActual = 0;
 	}
 
 	public Socio(SocioDto socioDto) {
@@ -72,12 +78,13 @@ public class Socio {
 		this.trofeos = new ArrayList<Trofeo>();
 	}
 
-	public void setearObjetivo(Objetivo objetivo) {
+	public void setearObjetivo(IObjetivo objetivo) {
 		this.objetivo = objetivo;
 	}
 
 	public void setMediciones(List<Medicion> mediciones) {
 		this.mediciones = mediciones;
+		
 	}
 
 	public MedicionDto realizarMedicion() {
@@ -229,7 +236,7 @@ public class Socio {
 		return mediciones;
 	}
 
-	public Objetivo getObjetivo() {
+	public IObjetivo getObjetivo() {
 		return objetivo;
 	}
 
@@ -278,6 +285,41 @@ public class Socio {
 			}
 
 		}
+		
+	}
+
+	@SuppressWarnings("static-access")
+	public void addMedicion(Medicion nuevaMedicion) {
+		mediciones.add(nuevaMedicion);
+		if(this.fechaUltimaMedicion != null) {
+			if(nuevaMedicion.getFecha().MONTH == this.fechaUltimaMedicion.MONTH) {
+				this.medicionesMesActual += 1;
+				if(this.medicionesMesActual == 3) {
+					notificar(); //TODO notificar 3 mediciones mensuales.
+				}
+			}else {
+				this.medicionesMesActual = 0;
+			}
+		}
+		this.fechaUltimaMedicion = nuevaMedicion.getFecha();
+		
+	}
+
+	@Override
+	public void agregar(IObserverTrofeos observer) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void eliminar(IObserverTrofeos observer) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void notificar() {
+		// TODO Auto-generated method stub
 		
 	}
 

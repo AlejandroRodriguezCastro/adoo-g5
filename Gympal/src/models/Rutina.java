@@ -2,12 +2,9 @@ package models;
 
 import models.enums.Dias;
 import models.enums.ExigenciaMuscular;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import dataSets.DataSets;
-import models.enums.Dias;
 
 public class Rutina {
 	private List<Entrenamiento> entrenamientos;

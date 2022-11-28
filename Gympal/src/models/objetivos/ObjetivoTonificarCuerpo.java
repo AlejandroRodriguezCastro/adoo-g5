@@ -7,16 +7,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ThreadLocalRandom;
-
-import adapter.AdapterPesoIdeal;
 import adapter.AdapterValoresIdeales;
 import controllers.EntrenamientoController;
 import controllers.RutinaController;
 import models.Ejercicio;
 import models.Entrenamiento;
 import models.Rutina;
-import models.Interfaces.IObservable;
-import models.Interfaces.adapters.IAdapterPesoIdeal;
 import models.Interfaces.adapters.IAdapterValoresIdeales;
 import models.enums.GrupoMuscular;
 import models.enums.Sexo;
@@ -31,11 +27,6 @@ public class ObjetivoTonificarCuerpo extends Objetivo {
 	private float IMCIdealMax;
 	private float grasaIdealMin;
 	private float grasaIdealMax;
-
-	@Override
-	public void serNotificadoPor(IObservable observable) {
-		return;
-	}
 
 	public float calcularIMCIdealMin(int edad, Sexo sexo) {
 		return this.valoresIdeales.obtenerIMCIdealMin(edad, sexo);
@@ -66,7 +57,6 @@ public class ObjetivoTonificarCuerpo extends Objetivo {
 
 		RutinaDto rutinaDto = new RutinaDto();
 		EntrenamientoDto entrenamientoDto = new EntrenamientoDto();
-		Calendar c1 = Calendar.getInstance();
 		List<Entrenamiento> entrenamientos = new ArrayList<>();
 		// int ejerciciosPorEntrenamiento = 4;
 		rutinaDto.setDiasCompletados(0);

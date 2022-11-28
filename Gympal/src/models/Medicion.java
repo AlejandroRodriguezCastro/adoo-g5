@@ -1,20 +1,15 @@
 package models;
 
-import models.Interfaces.IObservable;
-import models.Interfaces.IObserver;
 import models.Interfaces.adapters.IAdapterMasaMuscular;
 import models.Interfaces.adapters.IAdapterPeso;
 import models.Interfaces.adapters.IAdapterPorcentajeGrasa;
 import models.enums.Sexo;
-
 import java.util.Calendar;
-import java.util.List;
-
 import adapter.AdapterBalanzaGimnasio;
 import adapter.AdapterGrasaCorporal;
 import adapter.AdapterMasaMuscular;
 
-public class Medicion implements IObservable {
+public class Medicion {
 
 	@Override
 	public String toString() {
@@ -30,7 +25,6 @@ public class Medicion implements IObservable {
 	private Float masaMuscular;
 	private Float porcentajeGrasaCorporal;
 	private Calendar fecha;
-	private List<IObserver> observers;
 
 	public Medicion() {
 		this.adapterPeso = new AdapterBalanzaGimnasio();
@@ -64,21 +58,6 @@ public class Medicion implements IObservable {
 
 	public Calendar getFecha() {
 		return fecha;
-	}
-
-	@Override
-	public void agregar(IObserver observer) {
-		observers.add(observer);
-	}
-
-	@Override
-	public void eliminar(IObserver observer) {
-		observers.remove(observer);
-	}
-
-	@Override
-	public void notificar() {
-		observers.forEach(observer -> observer.serNotificadoPor(this));
 	}
 
 	public void setPeso(Float peso) {

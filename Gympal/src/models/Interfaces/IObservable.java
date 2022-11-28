@@ -2,8 +2,8 @@ package models.Interfaces;
 
 public interface IObservable {
 
-    void agregar(IObserver observer);
-    void eliminar(IObserver observer);
+    void agregar(IObserverTrofeos observer);
+    void eliminar(IObserverTrofeos observer);
     void notificar();
 
 }
