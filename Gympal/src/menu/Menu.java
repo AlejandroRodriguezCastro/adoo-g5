@@ -131,24 +131,24 @@ public class Menu {
 			opcion = menuOpciones(new String[] { "Datos Personales", "Cambiar Objetivo", "Pesarme",
 					"Comenzar Entrenamiento", "Registro de entrenamientos", "Mis Trofeos", "Salir" });
 			switch (opcion) {
-			case 1: //Datos personales
+			case 1: // Datos personales
 				SocioController.listar();
 				break;
-			case 2: //Cambiar Objetivo
+			case 2: // Cambiar Objetivo
 				menuSetearObjetivo(socioDto);
 				break;
-			case 3: //Pesarme
+			case 3: // Pesarme
 				subMenuPesarme();
 				// SocioController.listar();
 				break;
-			case 4: //Comenzar Entrenamiento
+			case 4: // Comenzar Entrenamiento
 				subMenuEjercicios(socioDto);
 				break;
-			case 5: //Registro de entrenamientos
+			case 5: // Registro de entrenamientos
 				subMenuHistorialEntrenamientos();
 				break;
-				
-			case 6: //Trofeos
+
+			case 6: // Trofeos
 				subMenuTrofeos();
 				break;
 			}
@@ -156,7 +156,7 @@ public class Menu {
 		} while (opcion != 7);
 
 	}
-	
+
 	private static void subMenuTrofeos() {
 		List<TrofeoDTO> trofeos = new ArrayList<>();
 		trofeos = SocioController.registroTrofeos();
@@ -167,11 +167,11 @@ public class Menu {
 				System.out.println("Descripción: " + trofeo.getDescripcion());
 				System.out.println("Fecha otorgado: " + trofeo.getFecha());
 				System.out.println("***************************************************************");
-				}
-		}else {
+			}
+		} else {
 			System.out.println("\n**A ponerle ganas para ganar trofeos!**");
 		}
-		
+
 	}
 
 	private static void subMenuHistorialEntrenamientos() {
@@ -186,14 +186,12 @@ public class Menu {
 				System.out.println("Dia de entrenamiento:" + entrenamientoDto.getDia());
 				System.out.println("Cantidad de ejercicios:" + entrenamientoDto.getCantidadEjercicios());
 				System.out.println("Completados:" + entrenamientoDto.getEjerciciosCompletados());
-				System.out.println(
-						"Fecha de entrenamiento:" + entrenamientoDto.getFechaAsignada().get(Calendar.DATE) + "/"
-								+ entrenamientoDto.getFechaAsignada().get(Calendar.MONTH) + "/"
-								+ entrenamientoDto.getFechaAsignada().get(Calendar.YEAR));
-				System.out
-						.println("Fecha de ejecucion:" + entrenamientoDto.getFechaEjecucion().get(Calendar.DATE)
-								+ "/" + entrenamientoDto.getFechaEjecucion().get(Calendar.MONTH) + "/"
-								+ entrenamientoDto.getFechaEjecucion().get(Calendar.YEAR));
+				System.out.println("Fecha de entrenamiento:" + entrenamientoDto.getFechaAsignada().get(Calendar.DATE)
+						+ "/" + entrenamientoDto.getFechaAsignada().get(Calendar.MONTH) + "/"
+						+ entrenamientoDto.getFechaAsignada().get(Calendar.YEAR));
+				System.out.println("Fecha de ejecucion:" + entrenamientoDto.getFechaEjecucion().get(Calendar.DATE) + "/"
+						+ entrenamientoDto.getFechaEjecucion().get(Calendar.MONTH) + "/"
+						+ entrenamientoDto.getFechaEjecucion().get(Calendar.YEAR));
 				System.out.println("***************************************************************");
 				System.out.println("\n*************************EJERCICIOS:***************************");
 				for (Entry<Integer, Ejercicio> entry : entrenamientoDto.getEjercicios().entrySet()) {
@@ -204,11 +202,12 @@ public class Menu {
 				}
 				System.out.println("\n***************************************************************");
 			}
-		} else 
-			
+		} else
+
 			System.out.println("\n**No tienes entrenamientos comenzados**");
 
 	}
+
 	public static void subMenuEjercicios(SocioDto socioDto) {
 		EntrenamientoDto entrenamientoDto = new EntrenamientoDto();
 		entrenamientoDto = SocioController.comenzarEntrenamiento();
@@ -293,50 +292,52 @@ public class Menu {
 	}
 
 	public static void subMenuEjercicio(SocioDto socioDto) {
-		
-		
+
 		int opcion = 0;
 		sc = new Scanner(System.in);
-		do {
-			System.out.println();
-			System.out.println("******************************************************");
-			System.out.println("************** ELIGE LA OPCION ****************");
-			System.out.println("******************************************************");
-			opcion = menuOpciones(new String[] { "Reforzar ejercicio", "Terminar ejercicio", "Terminar entrenamiento","Salir" });
-			int ejercicio, series, repeticiones;
-			float pesoAsignado;
-	
-			switch (opcion) {
-			case 1: //Reforzar ejercicio
-				EjercicioDto ejercicioDto = new EjercicioDto();
-				System.out.print("Elige el ejercicio a modificar: ");
-				ejercicio = sc.nextInt();
-				System.out.print("Indique series: ");
-				series = sc.nextInt();
-				System.out.print("Indique repeticiones: ");
-				repeticiones = sc.nextInt();
-				System.out.print("Indique peso: ");
-				pesoAsignado = sc.nextFloat();
-				ejercicioDto.setNroEjercicio(ejercicio);
-				ejercicioDto.setSeries(series);
-				ejercicioDto.setRepeticiones(repeticiones);
-				ejercicioDto.setPesoAsignado(pesoAsignado);
-				SocioController.reforzarEjercicio(ejercicioDto);
-				System.out.println("Ejercicio modificado");
-				break;
-			case 2: //Terminar Ejercicio
-				System.out.print("Elige el ejercicio a terminar: ");
-	
-				ejercicio = sc.nextInt();
-				SocioController.terminarEjercicio(ejercicio);
-				break;
-			case 3: //Terminar Entrenamiento
-				SocioController.terminarEntrenamiento();
-				System.out.println("Entrenamiento terminado");
-				opcion = 4;
-				break;
-			}
-		}while (opcion !=4);
+		System.out.println();
+		System.out.println("******************************************************");
+		System.out.println("************** ELIGE LA OPCION ****************");
+		System.out.println("******************************************************");
+		opcion = menuOpciones(
+				new String[] { "Reforzar ejercicio", "Terminar ejercicio", "Terminar entrenamiento", "Salir" });
+		int ejercicio, series, repeticiones;
+		float pesoAsignado;
+
+		switch (opcion) {
+		case 1: // Reforzar ejercicio
+			EjercicioDto ejercicioDto = new EjercicioDto();
+			System.out.print("Elige el ejercicio a modificar: ");
+			ejercicio = sc.nextInt();
+			System.out.print("Indique series: ");
+			series = sc.nextInt();
+			System.out.print("Indique repeticiones: ");
+			repeticiones = sc.nextInt();
+			System.out.print("Indique peso: ");
+			pesoAsignado = sc.nextFloat();
+			ejercicioDto.setNroEjercicio(ejercicio);
+			ejercicioDto.setSeries(series);
+			ejercicioDto.setRepeticiones(repeticiones);
+			ejercicioDto.setPesoAsignado(pesoAsignado);
+			SocioController.reforzarEjercicio(ejercicioDto);
+			System.out.println("Ejercicio modificado");
+			break;
+		case 2: // Terminar Ejercicio
+			System.out.print("Elige el ejercicio a terminar: ");
+			ejercicio = sc.nextInt();
+			SocioController.terminarEjercicio(ejercicio);
+			break;
+		case 3: // Terminar Entrenamiento
+			SocioController.terminarEntrenamiento();
+			System.out.println("Entrenamiento terminado");
+			// opcion = 4;
+			break;
+		case 4:
+			menuSocio(socioDto);
+			break;
+		}
+
+		subMenuEjercicios(socioDto);
 	}
 
 	public static void menuSetearObjetivo(SocioDto socioDto) {
@@ -347,8 +348,8 @@ public class Menu {
 		System.out.println("************** SELECCION DE OBJETIVOS ****************");
 		System.out.println("******************************************************");
 		opcion = menuOpciones(new String[] { "Bajar de Peso", "Mantener Figura", "Tonificar Cuerpo" });
-		
-		//menú NO debe ser el responsable por crear objetivos
+
+		// menú NO debe ser el responsable por crear objetivos
 		SocioController.setearObjetivo(opcion);
 		socioDto.setTieneObjetivo(true);
 	}
