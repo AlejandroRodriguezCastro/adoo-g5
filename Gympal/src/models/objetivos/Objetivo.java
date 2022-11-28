@@ -1,6 +1,8 @@
 package models.objetivos;
 
 import valueObject.SocioDto;
+import java.util.ArrayList;
+import java.util.List;
 import models.Rutina;
 import models.Interfaces.IObjetivo;
 
@@ -8,6 +10,7 @@ public abstract class Objetivo implements IObjetivo{
 
     private Float pesoInicial;
     private Rutina rutina;
+    private List<Rutina> rutinas = new ArrayList<Rutina>();
 
     public Float getPesoInicial() {
         return pesoInicial;
@@ -18,7 +21,10 @@ public abstract class Objetivo implements IObjetivo{
     }
 
     public void setRutina(Rutina rutina) {
-        this.rutina = rutina;
+    	if(rutina != null) {
+            this.rutinas.add(rutina);
+    	}
+    	this.rutina = rutina;
     }
 
 	public abstract Rutina CrearRutina(SocioDto socioDto);

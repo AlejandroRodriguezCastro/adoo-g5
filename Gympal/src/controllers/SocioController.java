@@ -47,11 +47,10 @@ public class SocioController {
 
 	public static void pesarSocio() {
 		//medicion sistema
-		//List<Medicion> mediciones = new ArrayList<>();
-		//mediciones = socio.getMediciones();
-		//mediciones.add(MedicionController.nuevaMedicion(socio.realizarMedicion()));
-		//socio.setMediciones(mediciones);
-		socio.addMedicion(MedicionController.nuevaMedicion(socio.realizarMedicion()));
+		List<Medicion> mediciones = new ArrayList<>();
+		mediciones = socio.getMediciones();
+		mediciones.add(MedicionController.nuevaMedicion(socio.realizarMedicion()));
+		socio.setMediciones(mediciones);
 		dataSets.guardarSocio(socio);
 	}
 

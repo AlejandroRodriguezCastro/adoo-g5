@@ -11,6 +11,11 @@ public class Rutina {
 	// private List<Dias> diasDeEntrenamiento;
 	private int duracion;
 	private int diasCompletados;
+	private boolean completada = false;
+
+	public boolean isCompletada() {
+		return completada;
+	}
 
 	public Rutina(List<Dias> diasDeEntrenamiento, Integer duracion) {
 		// this.diasDeEntrenamiento = diasDeEntrenamiento;
@@ -89,6 +94,9 @@ public class Rutina {
 	
 	public void diaCompletado() {
 		this.diasCompletados += 1;
+		if(diasCompletados == duracion) {
+			this.completada = true;
+		}
 	}
 	
 	

@@ -46,7 +46,7 @@ public class Socio implements IObservable{
 		this.edad = edad;
 		this.sexo = sexo;
 		this.altura = altura;
-		this.mediciones = new ArrayList<>();
+		this.mediciones = new ArrayList<Medicion>();
 		this.trofeos = new ArrayList<Trofeo>();
 		this.medicionesMesActual = 0;
 	}
@@ -60,7 +60,7 @@ public class Socio implements IObservable{
 		this.edad = edad;
 		this.sexo = sexo;
 		this.altura = altura;
-		this.mediciones = new ArrayList<>();
+		this.mediciones = new ArrayList<Medicion>();
 		this.trofeos = new ArrayList<Trofeo>();
 		this.medicionesMesActual = 0;
 	}
@@ -159,7 +159,7 @@ public class Socio implements IObservable{
 				if (RutinaController.crearRutina(this.objetivo, socioDto) != null) {
 
 					this.objetivo.setRutina(RutinaController.crearRutina(this.objetivo, socioDto));
-					System.out.println(this.objetivo.getRutina().toString());
+					//System.out.println(this.objetivo.getRutina().toString());
 					this.objetivo.indicarObjetivo();
 
 					for (Entrenamiento e : this.objetivo.getRutina().getEntrenamientos()) {
@@ -182,7 +182,7 @@ public class Socio implements IObservable{
 				return null;
 		} else {
 
-			System.out.println(this.objetivo.getRutina().toString());
+			//System.out.println(this.objetivo.getRutina().toString());
 			this.objetivo.indicarObjetivo();
 
 			for (Entrenamiento e : this.objetivo.getRutina().getEntrenamientos()) {
@@ -286,10 +286,17 @@ public class Socio implements IObservable{
 
 		}
 		
+		if(this.objetivo.getRutina().isCompletada()) { 
+			//TODO notificar(rutina) verificar trofeo a la constancia.
+			this.objetivo.setRutina(null); //rutina actual terminada, se generará una nueva cuando
+											// desee comenzar su entrenamiento al día siguiente.
+		}
+		
 	}
 
 	@SuppressWarnings("static-access")
 	public void addMedicion(Medicion nuevaMedicion) {
+		//TODO hacer que esto ande para guardar medición.
 		mediciones.add(nuevaMedicion);
 		if(this.fechaUltimaMedicion != null) {
 			if(nuevaMedicion.getFecha().MONTH == this.fechaUltimaMedicion.MONTH) {
@@ -302,6 +309,10 @@ public class Socio implements IObservable{
 			}
 		}
 		this.fechaUltimaMedicion = nuevaMedicion.getFecha();
+		
+		if(objetivo.objetivoAlcanzado(getSocioDto())) {
+			//TODO notificar trofeo a la dedicación.
+		}
 		
 	}
 
