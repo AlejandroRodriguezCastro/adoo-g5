@@ -1,8 +1,10 @@
 package valueObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import models.Medicion;
+import models.Trofeo;
 import models.enums.Sexo;
 import models.objetivos.Objetivo;
 
@@ -21,6 +23,7 @@ public class SocioDto {
 	private String passwd;
 	private Boolean tieneObjetivo;
 	private Objetivo objetivo;
+	private List<Trofeo> trofeos;
 
 	public SocioDto(String nombre2, String apellido2, String nroSocio2, String documento2, Integer edad2, Sexo sexo2,
 			Float altura2) {
@@ -138,5 +141,18 @@ public class SocioDto {
 
 	public void setGrasa(Float grasa) {
 		this.grasa = grasa;
+	}
+
+	public void setTrofeos(List<Trofeo> trofeos) {
+		this.trofeos = trofeos;
+		
+	}
+	
+	public List<TrofeoDTO> getTrofeos() {
+		List<TrofeoDTO> trofeosDto = new ArrayList<TrofeoDTO>();
+		for (Trofeo trofeo: trofeos) {
+			trofeosDto.add(new TrofeoDTO(trofeo));
+		}
+		return trofeosDto;
 	}
 }

@@ -7,11 +7,13 @@ import dataSets.DataSets;
 import models.Interfaces.adapters.IAdapterAutenticator;
 import models.Medicion;
 import models.Socio;
+import models.Trofeo;
 import models.objetivos.Objetivo;
 import valueObject.EjercicioDto;
 import valueObject.EntrenamientoDto;
 import valueObject.MedicionDto;
 import valueObject.SocioDto;
+import valueObject.TrofeoDTO;
 
 public class SocioController {
 
@@ -59,7 +61,7 @@ public class SocioController {
 	}
 
 	public static void setearObjetivo(Objetivo objetivo) {
-		socio.setearObjetvo(objetivo);
+		socio.setearObjetivo(objetivo);
 	}
 
 	public static EntrenamientoDto comenzarEntrenamiento() {
@@ -103,6 +105,12 @@ public class SocioController {
 			return EntrenamientoController.registroEntrenamiento(socioDto);
 		else
 			return null;
+	}
+
+	public static List<TrofeoDTO> registroTrofeos() {
+		SocioDto socioDto = new SocioDto();
+		socioDto.setTrofeos(socio.getTrofeos());
+		return socioDto.getTrofeos();
 	}
 
 }

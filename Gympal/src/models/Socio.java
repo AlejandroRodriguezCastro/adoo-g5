@@ -43,6 +43,7 @@ public class Socio {
 		this.sexo = sexo;
 		this.altura = altura;
 		this.mediciones = new ArrayList<>();
+		this.trofeos = new ArrayList<Trofeo>();
 	}
 
 	public Socio(String nombre, String apellido, String documento, Integer edad, Sexo sexo, Float altura) {
@@ -55,6 +56,7 @@ public class Socio {
 		this.sexo = sexo;
 		this.altura = altura;
 		this.mediciones = new ArrayList<>();
+		this.trofeos = new ArrayList<Trofeo>();
 	}
 
 	public Socio(SocioDto socioDto) {
@@ -67,9 +69,10 @@ public class Socio {
 		this.sexo = socioDto.getSexo();
 		this.altura = socioDto.getAltura();
 		this.mediciones = new ArrayList<>();
+		this.trofeos = new ArrayList<Trofeo>();
 	}
 
-	public void setearObjetvo(Objetivo objetivo) {
+	public void setearObjetivo(Objetivo objetivo) {
 		this.objetivo = objetivo;
 	}
 
