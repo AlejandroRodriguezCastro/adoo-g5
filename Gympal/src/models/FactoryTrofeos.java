@@ -21,12 +21,14 @@ public class FactoryTrofeos implements IObserverTrofeos{
 	}
 
 	@Override
-	public void serNotificadoObjetivoAlcanzado() {
-		Trofeo trofeo = new Trofeo("Trofeo a la Dedicación",
-				"Se otorga este trofeo a aquellos socios que cumplen con su objetivo",
-				Calendar.getInstance()
-				);
-		SocioController.getSocioController().otorgarTrofeo(trofeo);
+	public void serNotificadoObjetivoAlcanzado(Socio socio) {
+		if(socio.getObjetivo().objetivoAlcanzado(socio.getSocioDto())) {
+			Trofeo trofeo = new Trofeo("Trofeo a la Dedicación",
+					"Se otorga este trofeo a aquellos socios que cumplen con su objetivo",
+					Calendar.getInstance()
+					);
+			socio.agregarTrofeo(trofeo);
+		}
 	}
 
 	@Override
@@ -41,13 +43,15 @@ public class FactoryTrofeos implements IObserverTrofeos{
 	}
 
 	@Override
-	public void serNotificadoPesajeConsecutivoMensual() {
-		System.out.println("trofeo creado");
-		Trofeo trofeo = new Trofeo("Trofeo al creído",
-				"Se otorga este trofeo a quien se pese más de 3 veces al mes",
-				Calendar.getInstance()
-				);
-		SocioController.getSocioController().otorgarTrofeo(trofeo);
+	public void serNotificadoPesajeConsecutivoMensual(Socio socio) {
+		if(socio.getMedicionesMesActual() == 3) {
+			Trofeo trofeo = new Trofeo("Trofeo al creído",
+					"Se otorga este trofeo a quien se pese más de 3 veces al mes",
+					Calendar.getInstance()
+					);
+			socio.agregarTrofeo(trofeo);
+		}
+		
 	}
 	
 }

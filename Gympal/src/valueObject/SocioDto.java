@@ -24,7 +24,7 @@ public class SocioDto {
 	private List<Trofeo> trofeos;
 
 	public SocioDto(String nombre2, String apellido2, String nroSocio2, String documento2, Integer edad2, Sexo sexo2,
-			Float altura2,float peso2, Objetivo objetivo, List<Trofeo> trofeos) {
+			Float altura2,float peso2,float grasa2,float IMC2, Objetivo objetivo, List<Trofeo> trofeos) {
 		this.nombre = nombre2;
 		this.apellido = apellido2;
 		this.nroSocio = nroSocio2;
@@ -32,6 +32,11 @@ public class SocioDto {
 		this.edad = edad2;
 		this.sexo = sexo2;
 		this.altura = altura2; 
+		this.peso = peso2;
+		this.grasa = grasa2;
+		this.IMC = IMC2;
+		this.objetivo = objetivo;
+		this.trofeos = trofeos;
 	}
 
 	public SocioDto() {

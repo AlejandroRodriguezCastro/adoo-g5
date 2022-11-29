@@ -279,6 +279,8 @@ public class Socio {
 				sexo,
 				altura,
 				this.ultimoPeso(),
+				this.ultimoGrasa(),
+				this.ultimoIMC(),
 				objetivo,
 				trofeos);
 		return socio;

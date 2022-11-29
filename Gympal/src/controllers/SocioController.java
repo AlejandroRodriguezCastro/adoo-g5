@@ -72,12 +72,9 @@ public class SocioController implements IObservable{
 		mediciones.add(medicion);
 		socio.setMediciones(mediciones);
 		socio.contarMedicion(medicion);
-		if(socio.getMedicionesMesActual() == 3) {
-			notificarPesajeConsecutivoMensual();
-		}
-		if(socio.getObjetivo().objetivoAlcanzado(socio.getSocioDto())) {
-			notificarObjetivoAlcanzado();
-		}
+		notificarPesajeConsecutivoMensual(socio);
+		notificarObjetivoAlcanzado(socio);
+		
 		
 		dataSets.guardarSocio(socio);
 	}
@@ -90,12 +87,10 @@ public class SocioController implements IObservable{
 		mediciones.add(medicion);
 		socio.setMediciones(mediciones);
 		socio.contarMedicion(medicion);
-		if(socio.getMedicionesMesActual() == 3) {
-			notificarPesajeConsecutivoMensual();
-		}
-		if(socio.getObjetivo().objetivoAlcanzado(socio.getSocioDto())) {
-			notificarObjetivoAlcanzado();
-		}
+		notificarPesajeConsecutivoMensual(socio);
+		
+		notificarObjetivoAlcanzado(socio);
+		
 		dataSets.guardarSocio(socio);
 	}
 
@@ -178,9 +173,9 @@ public class SocioController implements IObservable{
 	}
 
 	@Override
-	public void notificarObjetivoAlcanzado() {
+	public void notificarObjetivoAlcanzado(Socio socio) {
 		for (IObserverTrofeos observador : observadores) {
-			observador.serNotificadoObjetivoAlcanzado();;
+			observador.serNotificadoObjetivoAlcanzado(socio);;
 		}
 	}
 
@@ -192,10 +187,9 @@ public class SocioController implements IObservable{
 	}
 
 	@Override
-	public void notificarPesajeConsecutivoMensual() {
-		System.out.println("observadores: " + observadores.size());
+	public void notificarPesajeConsecutivoMensual(Socio socio2) {
 		for (IObserverTrofeos observador : observadores) {
-			observador.serNotificadoPesajeConsecutivoMensual();
+			observador.serNotificadoPesajeConsecutivoMensual(socio);
 		}
 		
 	}

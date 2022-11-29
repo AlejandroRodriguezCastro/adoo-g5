@@ -1,13 +1,14 @@
 package models.Interfaces;
 
 import models.Rutina;
+import models.Socio;
 
 public interface IObservable {
 
     void agregar(IObserverTrofeos observer);
     void eliminar(IObserverTrofeos observer);
-    void notificarObjetivoAlcanzado();
+    void notificarObjetivoAlcanzado(Socio socio);
     void notificarRutinaTerminada(Rutina rutina);
-    void notificarPesajeConsecutivoMensual();
+    void notificarPesajeConsecutivoMensual(Socio socio);
 
 }
