@@ -4,8 +4,6 @@ import adapter.LoginAdapter;
 import controllers.EntrenamientoController;
 import controllers.MedicionController;
 import controllers.RutinaController;
-import models.Interfaces.IObservable;
-import models.Interfaces.IObserverTrofeos;
 import models.Interfaces.adapters.IAdapterAutenticator;
 import models.enums.Sexo;
 import models.objetivos.Objetivo;
@@ -17,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-public class Socio implements IObservable{
+public class Socio {
 	private static int Socios = 123456;
 	private String nombre;
 	private String apellido;
@@ -32,6 +30,14 @@ public class Socio implements IObservable{
 	private IAdapterAutenticator autenticador;
 	private Calendar fechaUltimaMedicion;
 	private int medicionesMesActual;
+
+	public int getMedicionesMesActual() {
+		return medicionesMesActual;
+	}
+
+	public void setMedicionesMesActual(int medicionesMesActual) {
+		this.medicionesMesActual = medicionesMesActual;
+	}
 
 	public Socio() {
 		this.autenticador = new LoginAdapter();
@@ -260,7 +266,16 @@ public class Socio implements IObservable{
 	}
 
 	public SocioDto getSocioDto() {
-		SocioDto socio = new SocioDto(nombre, apellido, nroSocio, documento, edad, sexo, altura);
+		SocioDto socio = new SocioDto(nombre,
+				apellido,
+				nroSocio,
+				documento,
+				edad,
+				sexo,
+				altura,
+				this.ultimoPeso(),
+				objetivo,
+				trofeos);
 		return socio;
 	}
 
@@ -284,54 +299,24 @@ public class Socio implements IObservable{
 				break;
 			}
 
-		}
-		
-		if(this.objetivo.getRutina().isCompletada()) { 
-			//TODO notificar(rutina) verificar trofeo a la constancia.
-			this.objetivo.setRutina(null); //rutina actual terminada, se generará una nueva cuando
-											// desee comenzar su entrenamiento al día siguiente.
-		}
-		
+		}		
 	}
 
 	@SuppressWarnings("static-access")
-	public void addMedicion(Medicion nuevaMedicion) {
-		//TODO hacer que esto ande para guardar medición.
+	public void contarMedicion(Medicion nuevaMedicion) {
 		mediciones.add(nuevaMedicion);
 		if(this.fechaUltimaMedicion != null) {
 			if(nuevaMedicion.getFecha().MONTH == this.fechaUltimaMedicion.MONTH) {
-				this.medicionesMesActual += 1;
-				if(this.medicionesMesActual == 3) {
-					notificar(); //TODO notificar 3 mediciones mensuales.
-				}
+				medicionesMesActual += 1;
 			}else {
-				this.medicionesMesActual = 0;
+				medicionesMesActual = 0;
 			}
 		}
-		this.fechaUltimaMedicion = nuevaMedicion.getFecha();
-		
-		if(objetivo.objetivoAlcanzado(getSocioDto())) {
-			//TODO notificar trofeo a la dedicación.
-		}
-		
+		this.fechaUltimaMedicion = nuevaMedicion.getFecha();		
 	}
 
-	@Override
-	public void agregar(IObserverTrofeos observer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void eliminar(IObserverTrofeos observer) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void notificar() {
-		// TODO Auto-generated method stub
-		
+	public void agregarTrofeo(Trofeo trofeo) {
+		this.trofeos.add(trofeo);
 	}
 
 }

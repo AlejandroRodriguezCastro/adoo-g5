@@ -24,7 +24,7 @@ public class SocioDto {
 	private List<Trofeo> trofeos;
 
 	public SocioDto(String nombre2, String apellido2, String nroSocio2, String documento2, Integer edad2, Sexo sexo2,
-			Float altura2) {
+			Float altura2,float peso2, Objetivo objetivo, List<Trofeo> trofeos) {
 		this.nombre = nombre2;
 		this.apellido = apellido2;
 		this.nroSocio = nroSocio2;

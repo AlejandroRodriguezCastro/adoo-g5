@@ -16,6 +16,7 @@ import valueObject.TrofeoDTO;
 
 public class Menu {
 	static Scanner sc;
+	static SocioController socioController = SocioController.getSocioController();
 
 	public static void mainMenu() {
 		sc = new Scanner(System.in);
@@ -53,12 +54,12 @@ public class Menu {
 			System.out.println("Ingrese su contrasenia:");
 			socioDto.setPasswd(sc.nextLine());
 
-			if (!SocioController.login(socioDto)) {
+			if (!socioController.login(socioDto)) {
 				System.out.println("Nro de socio o contraseÃ±a incorrecta");
 				System.out.println("presione 0 para salir o cualquier otra tecla para reintentar:");
 				exit = sc.nextLine().equals("0");
 			}
-		} while (!SocioController.login(socioDto) && !exit);
+		} while (!socioController.login(socioDto) && !exit);
 
 		if (!exit) {
 			menuSocio(socioDto);
@@ -99,8 +100,8 @@ public class Menu {
 
 		} while (!exit);
 
-		if (!SocioController.exists(socioDto)) {
-			socioDto.setNroSocio(SocioController.nuevoSocio(socioDto));
+		if (!socioController.exists(socioDto)) {
+			socioDto.setNroSocio(socioController.nuevoSocio(socioDto));
 			System.out.println("Usuario registrado con éxito." + "\nUsuario: " + socioDto.getNroSocio());
 		} else {
 			System.out.println("Ya existe un usuario asociado a este documento. "
@@ -132,14 +133,14 @@ public class Menu {
 					"Comenzar Entrenamiento", "Registro de entrenamientos", "Mis Trofeos", "Salir" });
 			switch (opcion) {
 			case 1: // Datos personales
-				SocioController.listar();
+				socioController.listar();
 				break;
 			case 2: // Cambiar Objetivo
 				menuSetearObjetivo(socioDto);
 				break;
 			case 3: // Pesarme
 				subMenuPesarme();
-				// SocioController.listar();
+				// socioController.listar();
 				break;
 			case 4: // Comenzar Entrenamiento
 				subMenuEjercicios(socioDto);
@@ -158,25 +159,26 @@ public class Menu {
 	}
 
 	private static void subMenuTrofeos() {
-		List<TrofeoDTO> trofeos = new ArrayList<>();
-		trofeos = SocioController.registroTrofeos();
+		List<TrofeoDTO> trofeos = socioController.registroTrofeos();
 		if (trofeos != null) {
-			for (TrofeoDTO trofeo : trofeos) {
-				System.out.println("***************************************************************");
-				System.out.println("Trofeo: " + trofeo.getNombre());
-				System.out.println("Descripción: " + trofeo.getDescripcion());
-				System.out.println("Fecha otorgado: " + trofeo.getFecha());
-				System.out.println("***************************************************************");
+			if(trofeos.size() > 0) {
+				for (TrofeoDTO trofeo : trofeos) {
+					System.out.println("***************************************************************");
+					System.out.println("Trofeo: " + trofeo.getNombre());
+					System.out.println("Descripción: " + trofeo.getDescripcion());
+					System.out.println("Fecha otorgado: " + trofeo.getFecha());
+					System.out.println("***************************************************************");
+				}
+			}else {
+				System.out.println("\n**A ponerle ganas para ganar trofeos!**");
 			}
-		} else {
-			System.out.println("\n**A ponerle ganas para ganar trofeos!**");
 		}
 
 	}
 
 	private static void subMenuHistorialEntrenamientos() {
 		List<EntrenamientoDto> entrenamientos = new ArrayList<>();
-		entrenamientos = SocioController.registroEntrenamiento();
+		entrenamientos = socioController.registroEntrenamiento();
 
 		if (entrenamientos != null) {
 
@@ -210,7 +212,7 @@ public class Menu {
 
 	public static void subMenuEjercicios(SocioDto socioDto) {
 		EntrenamientoDto entrenamientoDto = new EntrenamientoDto();
-		entrenamientoDto = SocioController.comenzarEntrenamiento();
+		entrenamientoDto = socioController.comenzarEntrenamiento();
 
 		if (entrenamientoDto != null) {
 
@@ -242,7 +244,7 @@ public class Menu {
 
 			}
 			System.out.println("\n***************************************************************");
-			// SocioController.listar();
+			// socioController.listar();
 
 			subMenuEjercicio(socioDto);
 
@@ -266,8 +268,8 @@ public class Menu {
 
 		switch (opcion) {
 		case 1:
-			SocioController.pesarSocio();
-			SocioController.listar();
+			socioController.pesarSocio();
+			socioController.listar();
 			break;
 		case 2:
 			System.out.println("Peso:");
@@ -281,11 +283,11 @@ public class Menu {
 
 			medicionDto.setFecha(c1);
 
-			SocioController.registrarPesaje(medicionDto);
+			socioController.registrarPesaje(medicionDto);
 
 			System.out.println("Pesaje Registrado");
 
-			SocioController.listar();
+			socioController.listar();
 
 			break;
 		}
@@ -319,16 +321,16 @@ public class Menu {
 			ejercicioDto.setSeries(series);
 			ejercicioDto.setRepeticiones(repeticiones);
 			ejercicioDto.setPesoAsignado(pesoAsignado);
-			SocioController.reforzarEjercicio(ejercicioDto);
+			socioController.reforzarEjercicio(ejercicioDto);
 			System.out.println("Ejercicio modificado");
 			break;
 		case 2: // Terminar Ejercicio
 			System.out.print("Elige el ejercicio a terminar: ");
 			ejercicio = sc.nextInt();
-			SocioController.terminarEjercicio(ejercicio);
+			socioController.terminarEjercicio(ejercicio);
 			break;
 		case 3: // Terminar Entrenamiento
-			SocioController.terminarEntrenamiento();
+			socioController.terminarEntrenamiento();
 			System.out.println("Entrenamiento terminado");
 			// opcion = 4;
 			break;
@@ -350,7 +352,7 @@ public class Menu {
 		opcion = menuOpciones(new String[] { "Bajar de Peso", "Mantener Figura", "Tonificar Cuerpo" });
 
 		// menú NO debe ser el responsable por crear objetivos
-		SocioController.setearObjetivo(opcion);
+		socioController.setearObjetivo(opcion);
 		socioDto.setTieneObjetivo(true);
 	}
 

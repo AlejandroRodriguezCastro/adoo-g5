@@ -1,9 +1,11 @@
 package models.Interfaces;
 
+import models.Rutina;
+
 public interface IObserverTrofeos {
 	//TODO IObserverTrofeos
-    void serNotificadoObjetivoAlcanzadoPor(IObservable observable);
-    void serNotificadoRutinaPerfectaPor(IObservable observable);
-    void setNotificadoPesajeConsecutivoMensualPor(IObservable observable);
+    void serNotificadoObjetivoAlcanzado();
+    void serNotificadoRutinaTerminada(Rutina rutina);
+    void serNotificadoPesajeConsecutivoMensual();
     
 }

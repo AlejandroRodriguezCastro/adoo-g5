@@ -98,6 +98,15 @@ public class Rutina {
 			this.completada = true;
 		}
 	}
+
+	public boolean entrenamientosCompletos() {
+		for (Entrenamiento entrenamiento : entrenamientos) {
+			if(entrenamiento.getCantidadEjercicios() != entrenamiento.getEjerciciosCompletados()) {
+				return false;
+			}
+		}
+		return true;
+	}
 	
 	
 
