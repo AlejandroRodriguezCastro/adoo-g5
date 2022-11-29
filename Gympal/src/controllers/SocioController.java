@@ -73,7 +73,9 @@ public class SocioController implements IObservable{
 		mediciones.add(medicion);
 		socio.setMediciones(mediciones);
 		socio.contarMedicion(medicion);
+		System.out.println("pesar Socio" + socio.getMedicionesMesActual());
 		if(socio.getMedicionesMesActual() == 3) {
+			System.out.println("3era medición notificar");
 			notificarPesajeConsecutivoMensual();
 		}
 		if(socio.getObjetivo().objetivoAlcanzado(socio.getSocioDto())) {
