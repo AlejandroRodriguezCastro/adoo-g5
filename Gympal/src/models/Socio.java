@@ -304,13 +304,14 @@ public class Socio {
 
 	@SuppressWarnings("static-access")
 	public void contarMedicion(Medicion nuevaMedicion) {
-		mediciones.add(nuevaMedicion);
 		if(this.fechaUltimaMedicion != null) {
 			if(nuevaMedicion.getFecha().MONTH == this.fechaUltimaMedicion.MONTH) {
 				medicionesMesActual += 1;
 			}else {
-				medicionesMesActual = 0;
+				medicionesMesActual = 1;
 			}
+		}else {
+			medicionesMesActual = 1;
 		}
 		this.fechaUltimaMedicion = nuevaMedicion.getFecha();		
 	}

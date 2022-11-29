@@ -31,7 +31,7 @@ public class SocioController implements IObservable{
 	private static SocioController controlador = null;
 	
 	private SocioController() {
-		
+		observadores.add(FactoryTrofeos.getFactoryTrofeos());
 	}
 	
 	public static SocioController getSocioController() {
@@ -48,7 +48,6 @@ public class SocioController implements IObservable{
 			socioDto.setApellido(socio.getApellido());
 			socioDto.setTieneObjetivo(socio.getObjetivo() != null);
 			socioDto.setObjetivo(socio.getObjetivo());
-			observadores.add(FactoryTrofeos.getFactoryTrofeos());
 			return true;
 		}
 		return false;
@@ -73,9 +72,7 @@ public class SocioController implements IObservable{
 		mediciones.add(medicion);
 		socio.setMediciones(mediciones);
 		socio.contarMedicion(medicion);
-		System.out.println("pesar Socio" + socio.getMedicionesMesActual());
 		if(socio.getMedicionesMesActual() == 3) {
-			System.out.println("3era medición notificar");
 			notificarPesajeConsecutivoMensual();
 		}
 		if(socio.getObjetivo().objetivoAlcanzado(socio.getSocioDto())) {
@@ -195,6 +192,7 @@ public class SocioController implements IObservable{
 
 	@Override
 	public void notificarPesajeConsecutivoMensual() {
+		System.out.println("observadores: " + observadores.size());
 		for (IObserverTrofeos observador : observadores) {
 			observador.serNotificadoPesajeConsecutivoMensual();
 		}

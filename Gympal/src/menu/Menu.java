@@ -166,7 +166,9 @@ public class Menu {
 					System.out.println("***************************************************************");
 					System.out.println("Trofeo: " + trofeo.getNombre());
 					System.out.println("Descripción: " + trofeo.getDescripcion());
-					System.out.println("Fecha otorgado: " + trofeo.getFecha());
+					System.out.println("Fecha otorgado: " + trofeo.getFecha().get(Calendar.DATE) + "/"
+														+ trofeo.getFecha().get(Calendar.MONTH) + "/"
+														+ trofeo.getFecha().get(Calendar.YEAR));
 					System.out.println("***************************************************************");
 				}
 			}else {
