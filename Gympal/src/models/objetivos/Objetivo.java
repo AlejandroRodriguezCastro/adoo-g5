@@ -4,9 +4,8 @@ import valueObject.SocioDto;
 import java.util.ArrayList;
 import java.util.List;
 import models.Rutina;
-import models.Interfaces.IObjetivo;
 
-public abstract class Objetivo implements IObjetivo{
+public abstract class Objetivo{
 
     private Float pesoInicial;
     private Rutina rutina;

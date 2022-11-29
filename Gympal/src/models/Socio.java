@@ -4,11 +4,11 @@ import adapter.LoginAdapter;
 import controllers.EntrenamientoController;
 import controllers.MedicionController;
 import controllers.RutinaController;
-import models.Interfaces.IObjetivo;
 import models.Interfaces.IObservable;
 import models.Interfaces.IObserverTrofeos;
 import models.Interfaces.adapters.IAdapterAutenticator;
 import models.enums.Sexo;
+import models.objetivos.Objetivo;
 import valueObject.EjercicioDto;
 import valueObject.EntrenamientoDto;
 import valueObject.MedicionDto;
@@ -27,7 +27,7 @@ public class Socio implements IObservable{
 	private Sexo sexo;
 	private Float altura;
 	private List<Medicion> mediciones;
-	private IObjetivo objetivo;
+	private Objetivo objetivo;
 	private List<Trofeo> trofeos;
 	private IAdapterAutenticator autenticador;
 	private Calendar fechaUltimaMedicion;
@@ -78,7 +78,7 @@ public class Socio implements IObservable{
 		this.trofeos = new ArrayList<Trofeo>();
 	}
 
-	public void setearObjetivo(IObjetivo objetivo) {
+	public void setearObjetivo(Objetivo objetivo) {
 		this.objetivo = objetivo;
 	}
 
@@ -236,7 +236,7 @@ public class Socio implements IObservable{
 		return mediciones;
 	}
 
-	public IObjetivo getObjetivo() {
+	public Objetivo getObjetivo() {
 		return objetivo;
 	}
 

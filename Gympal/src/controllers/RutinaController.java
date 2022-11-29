@@ -4,7 +4,7 @@ import java.util.List;
 
 import models.Ejercicio;
 import models.Rutina;
-import models.Interfaces.IObjetivo;
+import models.objetivos.Objetivo;
 import valueObject.RutinaDto;
 import valueObject.SocioDto;
 
@@ -12,7 +12,7 @@ public class RutinaController {
 
 	private static Rutina rutina = new Rutina();
 
-	public static Rutina crearRutina(IObjetivo objetivo, SocioDto socioDto) {
+	public static Rutina crearRutina(Objetivo objetivo, SocioDto socioDto) {
 		return objetivo.CrearRutina(socioDto);
 	}
 

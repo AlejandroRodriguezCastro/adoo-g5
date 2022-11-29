@@ -3,8 +3,8 @@ package valueObject;
 import java.util.ArrayList;
 import java.util.List;
 import models.Trofeo;
-import models.Interfaces.IObjetivo;
 import models.enums.Sexo;
+import models.objetivos.Objetivo;
 
 public class SocioDto {
 
@@ -20,7 +20,7 @@ public class SocioDto {
 	private Float grasa;
 	private String passwd;
 	private Boolean tieneObjetivo;
-	private IObjetivo objetivo;
+	private Objetivo objetivo;
 	private List<Trofeo> trofeos;
 
 	public SocioDto(String nombre2, String apellido2, String nroSocio2, String documento2, Integer edad2, Sexo sexo2,
@@ -109,12 +109,12 @@ public class SocioDto {
 		this.altura = altura;
 	}
 
-	public IObjetivo getObjetivo() {
+	public Objetivo getObjetivo() {
 		return objetivo;
 	}
 
-	public void setObjetivo(IObjetivo iObjetivo) {
-		this.objetivo = iObjetivo;
+	public void setObjetivo(Objetivo objetivo) {
+		this.objetivo = objetivo;
 	}
 
 	public Float getPeso() {
