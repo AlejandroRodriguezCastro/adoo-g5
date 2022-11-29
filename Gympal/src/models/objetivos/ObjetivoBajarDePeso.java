@@ -187,4 +187,11 @@ public class ObjetivoBajarDePeso extends Objetivo {
 		System.out.println("Peso entre: " + this.pesoIdealMin + "kg - " + this.pesoIdealMax + "kg");
 		System.out.println("****************************");
 	}
+	
+	@Override
+	public String toString() {
+		return "Objetivo: Bajar de Peso"
+				+ "\nPeso Ideal = " + pesoIdealMin + " - " + pesoIdealMax
+				+ "\nProgreso Rutina=" + rutina + "";
+	}
 }

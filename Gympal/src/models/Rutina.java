@@ -101,7 +101,8 @@ public class Rutina {
 
 	public boolean entrenamientosCompletos() {
 		for (Entrenamiento entrenamiento : entrenamientos) {
-			if(entrenamiento.getCantidadEjercicios() != entrenamiento.getEjerciciosCompletados()) {
+			if((entrenamiento.getCantidadEjercicios() != entrenamiento.getEjerciciosCompletados())
+				||	(entrenamiento.getFechaAsignada() != entrenamiento.getFechaEjecucion())) {
 				return false;
 			}
 		}

@@ -8,7 +8,7 @@ import models.Rutina;
 public abstract class Objetivo{
 
     private Float pesoInicial;
-    private Rutina rutina;
+    protected Rutina rutina;
     private List<Rutina> rutinas = new ArrayList<Rutina>();
 
     public Float getPesoInicial() {
@@ -37,9 +37,7 @@ public abstract class Objetivo{
 	}
 
 	@Override
-	public String toString() {
-		return "Objetivo [rutina=" + rutina + "]";
-	}
+	public abstract String toString();
 	
 	
 

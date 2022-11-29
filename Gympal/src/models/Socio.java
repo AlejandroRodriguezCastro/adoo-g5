@@ -260,9 +260,14 @@ public class Socio {
 
 	@Override
 	public String toString() {
-		return "\nSocio [nombre=" + nombre + ", apellido=" + apellido + ", nroSocio=" + nroSocio + ", documento="
-				+ documento + ", edad=" + edad + ", sexo=" + sexo + ", altura=" + altura + ", \n mediciones="
-				+ mediciones + "]";
+		return "\nSocio: \nNombre=" + nombre + " " + apellido 
+				+ "\nNroSocio=" + nroSocio 
+				+ "\nDocumento=" + documento 
+				+ "\nEdad=" + edad 
+				+ "\nSexo=" + sexo 
+				+ "\nAltura=" + altura
+				+ "\nObjetivo=" + objetivo.toString()
+				+ "\nMediciones=" + mediciones;
 	}
 
 	public SocioDto getSocioDto() {

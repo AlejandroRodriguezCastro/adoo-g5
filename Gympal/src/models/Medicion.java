@@ -13,7 +13,7 @@ public class Medicion {
 
 	@Override
 	public String toString() {
-		return "\n Medicion [peso=" + peso + ", masaMuscular=" + masaMuscular + ", porcentajeGrasaCorporal="
+		return "\n[peso=" + peso + ", masaMuscular=" + masaMuscular + ", porcentajeGrasaCorporal="
 				+ porcentajeGrasaCorporal + ", fecha=" + fecha.get(Calendar.DATE) + "/" + fecha.get(Calendar.MONTH)
 				+ "/" + fecha.get(Calendar.YEAR) + "]";
 	}

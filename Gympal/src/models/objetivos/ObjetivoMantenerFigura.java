@@ -159,4 +159,10 @@ public class ObjetivoMantenerFigura extends Objetivo {
 	public void setVariacion(VariacionPeso variacion) {
 		this.variacion = variacion;
 	}
+
+	@Override
+	public String toString() {
+		return "Objetivo: Mantener Forma"
+				+ "\n [rutina=" + rutina + "]";
+	}
 }

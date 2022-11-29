@@ -218,4 +218,12 @@ public class ObjetivoTonificarCuerpo extends Objetivo {
 	public void setGrasaIdealMax(float grasadealMax) {
 		this.grasaIdealMax = grasadealMax;
 	}
+
+	@Override
+	public String toString() {
+		return "Objetivo: Tonificar Cuerpo"
+				+ "\nIMC Ideal = " + IMCIdealMin + " - " + IMCIdealMax
+				+ "\nGrasa Ideal =" + grasaIdealMin + " - " + grasaIdealMax
+				+ "\n [rutina=" + rutina + "]";
+	}
 }

@@ -133,7 +133,7 @@ public class Menu {
 					"Comenzar Entrenamiento", "Registro de entrenamientos", "Mis Trofeos", "Salir" });
 			switch (opcion) {
 			case 1: // Datos personales
-				socioController.listar();
+				System.out.println(socioController.listar());
 				break;
 			case 2: // Cambiar Objetivo
 				menuSetearObjetivo(socioDto);
@@ -271,7 +271,7 @@ public class Menu {
 		switch (opcion) {
 		case 1:
 			socioController.pesarSocio();
-			socioController.listar();
+			System.out.println(socioController.listar());
 			break;
 		case 2:
 			System.out.println("Peso:");

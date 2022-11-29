@@ -60,8 +60,8 @@ public class SocioController implements IObservable{
 		return false;
 	}
 
-	public void listar() {
-		System.out.println(socio);
+	public String listar() {
+		return socio.toString();
 	}
 
 	public void pesarSocio() {
@@ -78,6 +78,7 @@ public class SocioController implements IObservable{
 		if(socio.getObjetivo().objetivoAlcanzado(socio.getSocioDto())) {
 			notificarObjetivoAlcanzado();
 		}
+		
 		dataSets.guardarSocio(socio);
 	}
 
